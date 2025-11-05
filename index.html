@@ -12,7 +12,7 @@
     :root {
       --brand: #ffbf00;
       --bg: #f8f8f8;
-      --dark: #1f1f1f;
+      --dark: #1b1b1b;
       --gray: #888;
       --radius: 20px;
       --shadow: 0 10px 20px rgba(0,0,0,0.05);
@@ -153,8 +153,17 @@
       background: #ffffff;
     }
 
+    .section-dark-wrapper {
+      background: var(--dark);
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+    }
+
     .section-dark {
-      background: #1b1b1b;
       color: #f1f1f1;
     }
 
@@ -179,7 +188,6 @@
       transform: none;
     }
 
-    /* Section dividers */
     .section-divider {
       height: 60px;
       background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.05));
@@ -225,16 +233,18 @@
 
   <div class="section-divider"></div>
 
-  <!-- CÓMO EMPEZAR -->
-  <section class="section section-dark fade-in-up" id="como-empezar">
-    <h2>Cómo empezar</h2>
-    <p>Tres pasos simples para poner orden y liberar tiempo.</p>
-    <div class="cards-3">
-      <div class="card"><h3>Paso 1 · Agendá una llamada</h3><p>Te conocemos, entendemos tu operación y priorizamos juntos.</p></div>
-      <div class="card"><h3>Paso 2 · Diseñamos la solución</h3><p>Te mostramos cómo va a funcionar y qué impacto tendrá.</p></div>
-      <div class="card"><h3>Paso 3 · Lo ponemos en marcha</h3><p>Construimos, conectamos y mejoramos a medida que usás.</p></div>
-    </div>
-  </section>
+  <!-- CÓMO EMPEZAR (FULL WIDTH DARK SECTION) -->
+  <div class="section-dark-wrapper">
+    <section class="section section-dark fade-in-up" id="como-empezar">
+      <h2>Cómo empezar</h2>
+      <p>Tres pasos simples para poner orden y liberar tiempo.</p>
+      <div class="cards-3">
+        <div class="card fade-in-up"><h3>Paso 1 · Agendá una llamada</h3><p>Te conocemos, entendemos tu operación y priorizamos juntos.</p></div>
+        <div class="card fade-in-up"><h3>Paso 2 · Diseñamos la solución</h3><p>Te mostramos cómo va a funcionar y qué impacto tendrá.</p></div>
+        <div class="card fade-in-up"><h3>Paso 3 · Lo ponemos en marcha</h3><p>Construimos, conectamos y mejoramos a medida que usás.</p></div>
+      </div>
+    </section>
+  </div>
 
   <div class="section-divider dark"></div>
 
@@ -252,17 +262,19 @@
   <div class="section-divider"></div>
 
   <!-- SERVICIOS -->
-  <section class="section section-dark fade-in-up" id="servicios">
-    <h2>Qué hacemos</h2>
-    <p>Soluciones que resuelven problemas reales hoy.</p>
-    <div class="cards-3">
-      <div class="card"><h3>CRM con IA</h3><p>Contactos, historial y seguimiento inteligente.</p></div>
-      <div class="card"><h3>Tableros</h3><p>Indicadores claros para clínicas, talleres, hoteles e inmobiliarias.</p></div>
-      <div class="card"><h3>Apps internas</h3><p>Carga de datos, turnos e informes sin fricción.</p></div>
-      <div class="card"><h3>Flujos entre áreas</h3><p>Ventas, operación y administración conectadas.</p></div>
-      <div class="card"><h3>Integraciones</h3><p>Chau copiar/pegar. Datos donde deben estar.</p></div>
-      <div class="card"><h3>Mejora de procesos</h3><p>Qué ordenar, qué automatizar y en qué orden.</p></div>
-    </div>
+  <section class="section section-dark-wrapper">
+    <section class="section section-dark fade-in-up" id="servicios">
+      <h2>Qué hacemos</h2>
+      <p>Soluciones que resuelven problemas reales hoy.</p>
+      <div class="cards-3">
+        <div class="card fade-in-up"><h3>CRM con IA</h3><p>Contactos, historial y seguimiento inteligente.</p></div>
+        <div class="card fade-in-up"><h3>Tableros</h3><p>Indicadores claros para clínicas, talleres, hoteles e inmobiliarias.</p></div>
+        <div class="card fade-in-up"><h3>Apps internas</h3><p>Carga de datos, turnos e informes sin fricción.</p></div>
+        <div class="card fade-in-up"><h3>Flujos entre áreas</h3><p>Ventas, operación y administración conectadas.</p></div>
+        <div class="card fade-in-up"><h3>Integraciones</h3><p>Chau copiar/pegar. Datos donde deben estar.</p></div>
+        <div class="card fade-in-up"><h3>Mejora de procesos</h3><p>Qué ordenar, qué automatizar y en qué orden.</p></div>
+      </div>
+    </section>
   </section>
 
   <div class="section-divider dark"></div>
@@ -279,7 +291,6 @@
     © 2025 Omnia — Procesos claros, equipo más libre.
   </footer>
 
-  <!-- Scroll Animation Script -->
   <script>
     const observer = new IntersectionObserver(
       entries => {
