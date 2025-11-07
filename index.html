@@ -2,238 +2,243 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Omnia</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --dark: #0b0b1f;
-      --violet: #3f0d75;
-      --light-gray: #f0f0f5;
-      --gray-dark: #1e1e2e;
+      --violeta-dark: #1a0033;
+      --violeta-mid: #3b0a66;
+      --violeta-light: #6a0dad;
+      --gris-claro: #f0f0f5;
+      --gris-oscuro: #111;
       --white: #fff;
     }
 
     * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
-      scroll-behavior: smooth;
     }
 
     body {
-      margin: 0;
       font-family: 'Inter', sans-serif;
-      color: var(--white);
-      background: var(--dark);
+      scroll-behavior: smooth;
     }
 
     header {
-      background: var(--dark);
+      background: #0b001a;
+      color: white;
       padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       position: sticky;
       top: 0;
-      z-index: 100;
-    }
-
-    header h1 {
-      margin: 0;
-      font-weight: 700;
-      font-size: 1.3rem;
+      z-index: 1000;
     }
 
     nav a {
-      color: var(--white);
-      margin-left: 2rem;
+      color: white;
       text-decoration: none;
+      margin-left: 2rem;
       font-weight: 500;
     }
 
     section {
-      padding: 6rem 1.5rem;
+      padding: 5rem 1.5rem;
       text-align: center;
     }
 
     .hero {
-      background: radial-gradient(circle at center, #3f0d75, #0b0b1f);
-      padding-top: 8rem;
-      padding-bottom: 6rem;
+      background: linear-gradient(135deg, #1a0033, #6a0dad);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
-    .hero h2 {
+    .hero h1 {
       font-size: 2.5rem;
       margin-bottom: 1rem;
     }
 
     .hero p {
-      font-size: 1.1rem;
-      max-width: 600px;
-      margin: 0 auto 2rem;
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
     }
 
-    .hero .button {
+    .hero .btn {
+      background: white;
+      color: #111;
+      border: none;
       padding: 0.8rem 1.5rem;
-      background: var(--white);
-      color: var(--dark);
       font-weight: 600;
-      border-radius: 30px;
-      text-decoration: none;
-      transition: 0.3s;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.3s;
     }
 
-    .hero .button:hover {
-      background: #ccc;
+    .hero .btn:hover {
+      background: #e0e0e0;
     }
 
     .wave {
-      position: relative;
-      margin-top: -5px;
-    }
-
-    .wave svg {
       display: block;
       width: 100%;
-      height: 80px;
+      height: auto;
     }
 
-    .about {
-      background: var(--gray-dark);
+    .section-light {
+      background-color: var(--gris-claro);
+      color: var(--gris-oscuro);
     }
 
-    .about h2 {
-      color: var(--white);
+    .section-dark {
+      background-color: #0b001a;
+      color: white;
     }
 
-    .about p {
-      color: #ccc;
-      max-width: 700px;
-      margin: auto;
-    }
-
-    .services {
-      background: var(--light-gray);
+    .section-gray {
+      background-color: #eaeaf0;
       color: #111;
     }
 
-    .services h2 {
+    h2 {
+      font-size: 2rem;
       margin-bottom: 1rem;
     }
 
-    .services p {
+    p {
+      font-size: 1rem;
       max-width: 700px;
-      margin: auto;
+      margin: 0 auto 2rem;
     }
 
-    .contact {
-      background: #e5e5e5;
-      color: #111;
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
     }
 
-    .contact .buttons {
+    .card {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .contact-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
       margin-top: 2rem;
     }
 
-    .contact .button {
-      margin: 0.5rem;
-      display: inline-block;
-      padding: 0.8rem 1.5rem;
-      background: var(--violet);
-      color: var(--white);
-      font-weight: 600;
-      border-radius: 30px;
+    .contact-buttons a {
+      background: white;
+      color: #111;
       text-decoration: none;
-      transition: 0.3s;
+      padding: 0.8rem 1.5rem;
+      border-radius: 999px;
+      font-weight: 600;
+      transition: background 0.3s;
     }
 
-    .contact .button:hover {
-      background: #5e2a8e;
+    .contact-buttons a:hover {
+      background: #ddd;
     }
 
     footer {
-      background: #111;
-      color: #aaa;
       text-align: center;
-      padding: 2rem 1rem;
-    }
-
-    /* Animation */
-    .animate {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-    .animate.show {
-      opacity: 1;
-      transform: translateY(0);
+      background: #000;
+      color: #ccc;
+      font-size: 0.9rem;
+      padding: 1.5rem;
     }
   </style>
 </head>
 <body>
 
-<header>
-  <h1>OMNIA</h1>
-  <nav>
-    <a href="#inicio">Inicio</a>
-    <a href="#nosotros">Nosotros</a>
-    <a href="#servicios">Servicios</a>
-    <a href="#contacto">Contacto</a>
-  </nav>
-</header>
+  <header>
+    <div><strong>OMNIA</strong></div>
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
 
-<section id="inicio" class="hero animate">
-  <h2>Su socio en transformación digital</h2>
-  <p>Impulsando la innovación y el crecimiento a través de soluciones digitales a medida.</p>
-  <a href="#contacto" class="button">Contáctanos</a>
-</section>
+  <!-- Hero Section -->
+  <section class="hero" id="inicio">
+    <h1>Su socio en transformación digital</h1>
+    <p>Impulsando la innovación y el crecimiento a través de soluciones digitales a medida.</p>
+    <a href="#contacto" class="btn">Contáctanos</a>
+  </section>
 
-<div class="wave">
-  <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
-    <path fill="#1e1e2e" d="M0,0 C600,80 800,0 1440,80 L1440,0 L0,0 Z"></path>
-  </svg>
-</div>
+  <!-- Wave SVG transition -->
+  <svg class="wave" viewBox="0 0 1440 100"><path fill="#f0f0f5" d="M0,0 C480,100 960,0 1440,100 L1440,0 L0,0 Z"></path></svg>
 
-<section id="nosotros" class="about animate">
-  <h2>Quiénes somos</h2>
-  <p>Somos especialistas en procesos, tecnología e inteligencia artificial aplicada. Nos enfocamos en diseñar soluciones concretas que ordenan la operación de tu negocio.</p>
-</section>
+  <!-- Quienes Somos -->
+  <section class="section-light" id="nosotros">
+    <h2>Quiénes somos</h2>
+    <p>Somos especialistas en procesos, tecnología e inteligencia artificial aplicada. Nos enfocamos en diseñar soluciones concretas que ordenan la operación de tu negocio.</p>
+  </section>
 
-<section id="servicios" class="services animate">
-  <h2>Qué hacemos</h2>
-  <p>Desde CRMs inteligentes hasta dashboards operativos, construimos herramientas a medida que escalan con vos.</p>
-</section>
+  <!-- Qué hacemos -->
+  <section class="section-gray" id="servicios">
+    <h2>Qué hacemos</h2>
+    <p>Desde CRMs inteligentes hasta dashboards operativos, construimos herramientas a medida que escalan con vos.</p>
+    <div class="cards">
+      <div class="card">CRM con IA<br/><small>Contactos, historial y seguimiento inteligente.</small></div>
+      <div class="card">Tableros<br/><small>Indicadores para clínicas, hoteles y más.</small></div>
+      <div class="card">Integraciones<br/><small>Automatizamos tareas y conectamos tus sistemas.</small></div>
+      <div class="card">Procesos<br/><small>Diseñamos flujos eficientes a medida.</small></div>
+    </div>
+  </section>
 
-<section id="contacto" class="contact animate">
-  <h2>¿Querés ver cómo aplicar esto en tu negocio?</h2>
-  <p>Contanos qué querés ordenar y te devolvemos un resumen de qué va primero y qué impacto esperar.</p>
-  <div class="buttons">
-    <a href="mailto:hola@omnia.com" class="button">Escribir por correo</a>
-    <a href="https://wa.me/5491124016245" class="button" target="_blank">WhatsApp</a>
-  </div>
-</section>
+  <!-- Contacto -->
+  <section class="hero" id="contacto">
+    <h2>¿Querés ver cómo aplicar esto en tu negocio?</h2>
+    <p>Contanos qué querés ordenar y te devolvemos una propuesta concreta.</p>
+    <div class="contact-buttons">
+      <a href="mailto:info@omnia.com">Escribir por correo</a>
+      <a href="https://wa.me/5491124016245" target="_blank">Escribir por WhatsApp</a>
+    </div>
+  </section>
 
-<footer>
-  © 2025 Omnia — Procesos claros, equipo más libre.
-</footer>
+  <footer>
+    © 2025 Omnia — Procesos claros, equipo más libre.
+  </footer>
 
-<script>
-  // Scroll animation (intersection observer)
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.classList.add('show');
-      } else {
-        entry.target.classList.remove('show'); // so it repeats
-      }
-    });
-  }, {
-    threshold: 0.1
-  });
+  <script>
+    const cards = document.querySelectorAll('.card');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        } else {
+          entry.target.classList.remove('visible');
+        }
+      });
+    }, { threshold: 0.2 });
 
-  document.querySelectorAll('.animate').forEach(el => observer.observe(el));
-</script>
+    cards.forEach(card => observer.observe(card));
+  </script>
 
 </body>
 </html>
