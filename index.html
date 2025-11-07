@@ -2,203 +2,235 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Omnia · Transformación Digital</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --brand: #ffbf00;
-      --bg-gradient: linear-gradient(135deg, #14002c, #280247);
-      --max-width: 1100px;
-      --radius: 20px;
+      --color-dark: #12002a;
+      --color-light: #ffffff;
+      --color-accent: #31005f;
+      --color-bg-section-1: #ffffff;
+      --color-bg-section-2: #0e0329;
+      --color-bg-section-3: #f7f7f7;
+      --radius: 16px;
+      --max-width: 1200px;
     }
 
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
       font-family: 'Inter', sans-serif;
-      background: var(--bg-gradient);
+      background-color: var(--color-dark);
       color: #fff;
-      line-height: 1.6;
-      overflow-x: hidden;
     }
 
     header {
       position: fixed;
       top: 0;
       width: 100%;
-      background: rgba(0,0,0,0.4);
-      padding: 20px 30px;
+      background-color: rgba(0,0,0,0.6);
+      backdrop-filter: blur(8px);
+      z-index: 999;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      z-index: 1000;
-      backdrop-filter: blur(8px);
+      padding: 20px 40px;
     }
 
     .logo {
+      font-size: 1.5rem;
       font-weight: 700;
-      font-size: 1.4rem;
+      color: white;
     }
 
     nav a {
-      color: #fff;
+      color: white;
       margin-left: 20px;
       text-decoration: none;
       font-weight: 500;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--color-accent);
+    }
+
+    section {
+      width: 100%;
+      padding: 100px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: background-color 0.6s ease;
     }
 
     .hero {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 0 20px;
       background: radial-gradient(circle at bottom left, #31005f, #11001d);
-      position: relative;
-      overflow: hidden;
+      color: white;
+      padding: 180px 20px 140px;
     }
 
     .hero h1 {
       font-size: 3rem;
-      font-weight: 700;
       margin-bottom: 20px;
     }
 
     .hero p {
-      font-size: 1.2rem;
       max-width: 600px;
       margin-bottom: 30px;
+      font-size: 1.2rem;
       color: #d0d0d0;
     }
 
     .btn {
-      padding: 14px 28px;
-      border-radius: 999px;
-      background: #fff;
-      color: #000;
-      font-weight: 600;
+      background: white;
+      color: black;
+      border: none;
+      padding: 14px 32px;
       font-size: 1rem;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-weight: 600;
       text-decoration: none;
-      transition: all 0.3s ease;
     }
 
     .btn:hover {
-      background: var(--brand);
-      color: #000;
-      transform: translateY(-2px);
+      background: #ffbf00;
     }
 
-    /* Abstract SVG curves */
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: -100px;
-      left: -100px;
-      width: 800px;
-      height: 800px;
-      background: radial-gradient(circle at center, rgba(255, 0, 200, 0.15), transparent 70%);
-      border-radius: 50%;
-      z-index: 0;
-      animation: float 12s ease-in-out infinite alternate;
+    .section-light {
+      background-color: var(--color-bg-section-1);
+      color: #222;
     }
 
-    .hero::before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle at center, rgba(255, 255, 255, 0.05), transparent 80%);
-      border-radius: 50%;
-      z-index: 0;
+    .section-dark {
+      background-color: var(--color-bg-section-2);
+      color: white;
     }
 
-    .hero > * {
-      position: relative;
-      z-index: 1;
+    .section-light-alt {
+      background-color: var(--color-bg-section-3);
+      color: #222;
     }
 
-    @keyframes float {
-      0% { transform: translateY(0px) scale(1); }
-      100% { transform: translateY(-20px) scale(1.05); }
-    }
-
-    @media (max-width: 600px) {
-      .hero h1 {
-        font-size: 2rem;
-      }
-      .btn {
-        width: 100%;
-        max-width: 280px;
-      }
-    }
-
-    /* Example sections after hero */
-    section {
-      padding: 80px 20px;
+    .section-content {
       max-width: var(--max-width);
-      margin: 0 auto;
     }
 
-    section h2 {
-      font-size: 2rem;
+    .section-content h2 {
+      font-size: 2.2rem;
       margin-bottom: 20px;
     }
 
-    section p {
-      color: #ccc;
-      max-width: 700px;
-      margin-bottom: 30px;
+    .section-content p {
+      font-size: 1.1rem;
+      color: inherit;
+    }
+
+    footer {
+      background-color: #000;
+      color: #aaa;
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+    }
+
+    /* Scroll animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease-out;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
 <body>
 
+  <!-- NAVBAR -->
   <header>
     <div class="logo">OMNIA</div>
     <nav>
       <a href="#inicio">Inicio</a>
-      <a href="#contacto">Contáctanos</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#contacto">Contacto</a>
     </nav>
   </header>
 
   <!-- HERO -->
   <section class="hero" id="inicio">
-    <h1>Su socio en transformación digital</h1>
-    <p>Impulsando la innovación y el crecimiento a través de soluciones digitales a medida.</p>
-    <a href="#contacto" class="btn">Contáctanos</a>
+    <div class="section-content">
+      <h1 class="fade-in">Su socio en transformación digital</h1>
+      <p class="fade-in">Impulsando la innovación y el crecimiento a través de soluciones digitales a medida.</p>
+      <a href="#contacto" class="btn fade-in">Contáctanos</a>
+    </div>
   </section>
 
-  <!-- SOBRE NOSOTROS -->
-  <section id="nosotros">
-    <h2>Quiénes somos</h2>
-    <p>Somos especialistas en procesos, tecnología e inteligencia artificial aplicada. Nos enfocamos en diseñar soluciones concretas que ordenan la operación de tu negocio.</p>
+  <!-- NOSOTROS -->
+  <section class="section-light" id="nosotros">
+    <div class="section-content fade-in">
+      <h2>Quiénes somos</h2>
+      <p>Somos especialistas en procesos, tecnología e inteligencia artificial aplicada. Nos enfocamos en diseñar soluciones concretas que ordenan la operación de tu negocio.</p>
+    </div>
   </section>
 
   <!-- SERVICIOS -->
-  <section id="servicios">
-    <h2>Qué hacemos</h2>
-    <p>Desde CRMs inteligentes hasta dashboards operativos, construimos herramientas a medida que escalan con vos.</p>
+  <section class="section-dark" id="servicios">
+    <div class="section-content fade-in">
+      <h2>Qué hacemos</h2>
+      <p>Desde CRMs inteligentes hasta dashboards operativos, construimos herramientas a medida que escalan con vos.</p>
+    </div>
   </section>
 
   <!-- CONTACTO -->
-  <section id="contacto">
-    <h2>¿Querés ver cómo aplicar esto en tu negocio?</h2>
-    <p>Contanos qué querés ordenar y te devolvemos un plan claro: qué va primero y qué impacto esperar.</p>
-    <a href="mailto:admin@omniarg.com" class="btn">Escribir por correo</a>
+  <section class="section-light-alt" id="contacto">
+    <div class="section-content fade-in">
+      <h2>¿Querés ver cómo aplicar esto en tu negocio?</h2>
+      <p>Contanos qué querés ordenar y te devolvemos un plan claro: qué va primero y qué impacto esperar.</p>
+      <a href="mailto:admin@omniarg.com" class="btn">Escribir por correo</a>
+    </div>
   </section>
 
-  <footer style="text-align:center;padding:40px 20px;color:#777;font-size:0.9rem">
+  <!-- FOOTER -->
+  <footer>
     © 2025 Omnia — Procesos claros, equipo más libre.
   </footer>
+
+  <!-- Scroll animation JS -->
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.2
+    });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
 
 </body>
 </html>
