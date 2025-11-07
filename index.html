@@ -86,50 +86,60 @@
     }
 
     /* SERVICIOS */
-    .services-list {
+    .services {
       background-color: #0e0e0e;
       color: #fff;
       padding: 6rem 3rem;
+      font-family: 'Inter', sans-serif;
+      max-width: 900px;
+      margin: 0 auto;
     }
 
-    .services-list h2 {
+    .services h2 {
       font-size: clamp(2rem, 4vw, 2.4rem);
       margin-bottom: 3rem;
       text-align: left;
       color: var(--accent);
     }
 
-    .service-item {
-      margin-bottom: 4rem;
-      max-width: 900px;
+    .service {
+      margin-bottom: 6rem;
       text-align: left;
+      position: relative;
     }
 
-    .service-item h3 {
-      font-size: clamp(1.8rem, 3vw, 2.2rem);
-      font-weight: 600;
+    .service-title {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
       color: var(--accent);
+      font-weight: 600;
       margin-bottom: 1rem;
     }
 
-    .service-item p {
+    .service-description {
       font-size: 1.1rem;
-      line-height: 1.6;
       color: #ccc;
+      line-height: 1.6;
       opacity: 0;
-      transform: translateY(10px);
+      transform: translateY(20px);
       transition: all 0.6s ease;
+      max-width: 700px;
     }
 
-    .service-item p.visible {
+    .service.in-view .service-description {
       opacity: 1;
       transform: translateY(0);
     }
 
     @media (max-width: 768px) {
-      .services-list { padding: 4rem 1.5rem; }
-      .service-item h3 { font-size: 1.6rem; }
-      .service-item p { font-size: 1rem; }
+      .services {
+        padding: 4rem 1.5rem;
+      }
+      .service-title {
+        font-size: 1.6rem;
+      }
+      .service-description {
+        font-size: 1rem;
+      }
     }
 
     /* CONTACTO */
@@ -196,27 +206,27 @@
   </section>
 
   <!-- SERVICIOS -->
-  <section class="services-list" id="servicios">
+  <section class="services" id="servicios">
     <h2>Servicios</h2>
 
-    <div class="service-item">
-      <h3>CRM con Inteligencia Artificial</h3>
-      <p class="description">Gestioná tus contactos, interacciones y oportunidades con un sistema inteligente que aprende y automatiza tareas repetitivas.</p>
+    <div class="service">
+      <h3 class="service-title">CRM con Inteligencia Artificial</h3>
+      <p class="service-description">Gestioná tus contactos, interacciones y oportunidades con un sistema inteligente que aprende y automatiza tareas repetitivas.</p>
     </div>
 
-    <div class="service-item">
-      <h3>Dashboards Operativos</h3>
-      <p class="description">Visualizá métricas claves en tiempo real con dashboards personalizados para tu negocio.</p>
+    <div class="service">
+      <h3 class="service-title">Dashboards Operativos</h3>
+      <p class="service-description">Visualizá métricas claves en tiempo real con dashboards personalizados para tu negocio.</p>
     </div>
 
-    <div class="service-item">
-      <h3>Integraciones Automatizadas</h3>
-      <p class="description">Conectamos tus sistemas y automatizamos tareas repetitivas para que tu equipo se enfoque en lo importante.</p>
+    <div class="service">
+      <h3 class="service-title">Integraciones Automatizadas</h3>
+      <p class="service-description">Conectamos tus sistemas y automatizamos tareas repetitivas para que tu equipo se enfoque en lo importante.</p>
     </div>
 
-    <div class="service-item">
-      <h3>Optimización de Procesos</h3>
-      <p class="description">Diseñamos flujos eficientes y escalables que aumentan la productividad y reducen errores operativos.</p>
+    <div class="service">
+      <h3 class="service-title">Optimización de Procesos</h3>
+      <p class="service-description">Diseñamos flujos eficientes y escalables que aumentan la productividad y reducen errores operativos.</p>
     </div>
   </section>
 
@@ -235,19 +245,21 @@
   </footer>
 
   <script>
-    // Detectar cuando las descripciones entran en pantalla y animarlas
-    const descriptions = document.querySelectorAll(".service-item .description");
+    // IntersectionObserver para revelar servicios progresivamente
+    const services = document.querySelectorAll(".service");
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target); // para que no se repita
+          // quitar in-view de todos
+          services.forEach(s => s.classList.remove("in-view"));
+          // agregar solo al que está más visible
+          entry.target.classList.add("in-view");
         }
       });
-    }, { threshold: 0.2 });
+    }, { threshold: 0.6 });
 
-    descriptions.forEach(desc => observer.observe(desc));
+    services.forEach(service => observer.observe(service));
   </script>
 
 </body>
