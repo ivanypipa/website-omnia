@@ -14,6 +14,7 @@
       --gris-claro: #f0f0f5;
       --gris-oscuro: #111;
       --white: #fff;
+      --accent: #b366ff;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -47,8 +48,7 @@
     nav a:hover { opacity: 0.7; }
 
     section {
-      padding: 5rem 1.5rem;
-      text-align: center;
+      padding: 5rem 2rem;
     }
 
     /* HERO */
@@ -84,57 +84,72 @@
     .section-light {
       background-color: var(--gris-claro);
       color: var(--gris-oscuro);
+      text-align: center;
     }
 
-    /* SERVICIOS SCROLL STORYTELLING */
-    .services-section {
-      height: 100vh;
-      overflow-y: scroll;
-      scroll-snap-type: y mandatory;
-      scroll-behavior: smooth;
+    /* NUEVA SECCIÓN DE SERVICIOS */
+    .services-list {
       background-color: #0e0e0e;
       color: #fff;
+      padding: 6rem 3rem;
       font-family: 'Inter', sans-serif;
     }
 
-    .service-block {
-      height: 100vh;
-      scroll-snap-align: start;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 2rem;
-      text-align: center;
-      transition: opacity 0.5s ease, transform 0.5s ease;
-      opacity: 0.4;
-      transform: scale(0.98);
+    .services-list h2 {
+      font-size: 2.2rem;
+      margin-bottom: 3rem;
+      text-align: left;
+      color: var(--accent);
     }
 
-    .service-block.in-view {
-      opacity: 1;
-      transform: scale(1);
+    .service-item {
+      margin-bottom: 4rem;
+      max-width: 900px;
+      cursor: pointer;
+      text-align: left;
     }
 
     .service-title {
-      font-size: clamp(2rem, 5vw, 3rem);
+      font-size: 2.4rem;
       font-weight: 600;
-      color: #b366ff;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      transition: color 0.3s;
+    }
+
+    .service-title:hover {
+      color: #c488ff;
     }
 
     .service-description {
-      font-size: clamp(1.2rem, 3vw, 1.6rem);
-      max-width: 800px;
+      font-size: 1.2rem;
+      color: #ccc;
       line-height: 1.6;
-      color: #ddd;
+      margin: 0;
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      transform: translateY(10px);
+      transition: all 0.4s ease;
     }
 
-    .services-section::-webkit-scrollbar {
-      width: 6px;
+    .service-item.active .service-description {
+      opacity: 1;
+      max-height: 300px;
+      margin-top: 0.5rem;
+      transform: translateY(0);
     }
-    .services-section::-webkit-scrollbar-thumb {
-      background: #3b0a66;
-      border-radius: 3px;
+
+    @media (max-width: 768px) {
+      .service-title {
+        font-size: 1.8rem;
+      }
+      .service-description {
+        font-size: 1rem;
+      }
+      .services-list {
+        padding: 4rem 1.5rem;
+      }
     }
 
     /* CONTACTO */
@@ -168,16 +183,6 @@
       font-size: 0.9rem;
       padding: 1.5rem;
     }
-
-    @media (max-width: 768px) {
-      .service-title {
-        font-size: 2rem;
-      }
-      .service-description {
-        font-size: 1.2rem;
-        padding: 0 1rem;
-      }
-    }
   </style>
 </head>
 <body>
@@ -210,33 +215,27 @@
     <p>Somos especialistas en procesos, tecnología e inteligencia artificial aplicada. Nos enfocamos en diseñar soluciones concretas que ordenan la operación de tu negocio.</p>
   </section>
 
-  <!-- SERVICIOS SCROLL STORYTELLING -->
-  <section class="services-section" id="servicios">
-    <div class="service-block">
-      <h2 class="service-title">CRM con Inteligencia Artificial</h2>
-    </div>
-    <div class="service-block">
+  <!-- SERVICIOS -->
+  <section class="services-list" id="servicios">
+    <h2>Servicios</h2>
+
+    <div class="service-item" onclick="toggleDescription(this)">
+      <h3 class="service-title">CRM con Inteligencia Artificial</h3>
       <p class="service-description">Gestioná tus contactos, interacciones y oportunidades con un sistema inteligente que aprende y automatiza tareas repetitivas.</p>
     </div>
 
-    <div class="service-block">
-      <h2 class="service-title">Dashboards Operativos</h2>
-    </div>
-    <div class="service-block">
+    <div class="service-item" onclick="toggleDescription(this)">
+      <h3 class="service-title">Dashboards Operativos</h3>
       <p class="service-description">Visualizá métricas claves en tiempo real con dashboards personalizados para tu negocio.</p>
     </div>
 
-    <div class="service-block">
-      <h2 class="service-title">Integraciones Automatizadas</h2>
-    </div>
-    <div class="service-block">
+    <div class="service-item" onclick="toggleDescription(this)">
+      <h3 class="service-title">Integraciones Automatizadas</h3>
       <p class="service-description">Conectamos tus sistemas y automatizamos tareas repetitivas para que tu equipo se enfoque en lo importante.</p>
     </div>
 
-    <div class="service-block">
-      <h2 class="service-title">Optimización de Procesos</h2>
-    </div>
-    <div class="service-block">
+    <div class="service-item" onclick="toggleDescription(this)">
+      <h3 class="service-title">Optimización de Procesos</h3>
       <p class="service-description">Diseñamos flujos eficientes y escalables que aumentan la productividad y reducen errores operativos.</p>
     </div>
   </section>
@@ -256,15 +255,22 @@
   </footer>
 
   <script>
-    // Animación de aparición suave en servicios
-    const blocks = document.querySelectorAll('.service-block');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        entry.target.classList.toggle('in-view', entry.isIntersecting);
-      });
-    }, { threshold: 0.6 });
+    // Toggle manual por clic
+    function toggleDescription(item) {
+      item.classList.toggle("active");
+    }
 
-    blocks.forEach(block => observer.observe(block));
+    // Animación de entrada al hacer scroll
+    const items = document.querySelectorAll(".service-item");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+        }
+      });
+    }, { threshold: 0.2 });
+
+    items.forEach(item => observer.observe(item));
   </script>
 
 </body>
