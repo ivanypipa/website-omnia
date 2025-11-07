@@ -51,6 +51,7 @@
       text-align: center;
     }
 
+    /* HERO */
     .hero {
       background: linear-gradient(135deg, #1a0033, #6a0dad);
       color: white;
@@ -85,105 +86,58 @@
       color: var(--gris-oscuro);
     }
 
-    .section-dark {
-      background-color: #0b001a;
-      color: white;
+    /* SERVICIOS SCROLL STORYTELLING */
+    .services-section {
+      height: 100vh;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+      background-color: #0e0e0e;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
     }
 
-    .section-gray {
-      background-color: #eaeaf0;
-      color: #111;
-    }
-
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    p {
-      font-size: 1rem;
-      max-width: 700px;
-      margin: 0 auto 2rem;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .card {
-      background: white;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-
-    .card.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Split section */
-    .split-section {
+    .service-block {
+      height: 100vh;
+      scroll-snap-align: start;
       display: flex;
-      flex-wrap: wrap;
-      align-items: center;
+      flex-direction: column;
       justify-content: center;
-      max-width: 1200px;
-      margin: 0 auto;
-      gap: 3rem;
-      padding: 4rem 1.5rem;
-    }
-
-    .split-text {
-      flex: 1 1 400px;
-      text-align: left;
-      color: white;
-    }
-
-    .split-text h3 {
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
-      color: var(--violeta-light);
-    }
-
-    .split-text p {
-      margin-bottom: 1.5rem;
-      color: #ccc;
-    }
-
-    .split-text .icon {
-      width: 50px;
-      height: 50px;
-      margin-bottom: 1rem;
-      fill: var(--violeta-light);
-    }
-
-    .split-image {
-      flex: 1 1 400px;
+      align-items: center;
+      padding: 2rem;
       text-align: center;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      opacity: 0.4;
+      transform: scale(0.98);
     }
 
-    .split-image img {
-      max-width: 90%;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s ease;
-    }
-
-    .split-image.visible img {
+    .service-block.in-view {
       opacity: 1;
-      transform: translateY(0);
+      transform: scale(1);
     }
 
+    .service-title {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 600;
+      color: #b366ff;
+    }
+
+    .service-description {
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
+      max-width: 800px;
+      line-height: 1.6;
+      color: #ddd;
+    }
+
+    .services-section::-webkit-scrollbar {
+      width: 6px;
+    }
+    .services-section::-webkit-scrollbar-thumb {
+      background: #3b0a66;
+      border-radius: 3px;
+    }
+
+    /* CONTACTO */
     .contact-buttons {
       display: flex;
       justify-content: center;
@@ -216,8 +170,13 @@
     }
 
     @media (max-width: 768px) {
-      .split-text, .split-image { text-align: center; }
-      .split-section { padding: 3rem 1rem; }
+      .service-title {
+        font-size: 2rem;
+      }
+      .service-description {
+        font-size: 1.2rem;
+        padding: 0 1rem;
+      }
     }
   </style>
 </head>
@@ -233,46 +192,56 @@
     </nav>
   </header>
 
-  <!-- Hero Section -->
+  <!-- HERO -->
   <section class="hero" id="inicio">
     <h1>Su socio en transformación digital</h1>
     <p>Impulsando la innovación y el crecimiento a través de soluciones digitales a medida.</p>
     <a href="#contacto" class="btn">Contáctanos</a>
   </section>
 
-  <!-- Wave transition -->
-  <svg class="wave" viewBox="0 0 1440 100"><path fill="#f0f0f5" d="M0,0 C480,100 960,0 1440,100 L1440,0 L0,0 Z"></path></svg>
+  <!-- WAVE -->
+  <svg class="wave" viewBox="0 0 1440 100">
+    <path fill="#f0f0f5" d="M0,0 C480,100 960,0 1440,100 L1440,0 L0,0 Z"></path>
+  </svg>
 
-  <!-- Quienes Somos -->
+  <!-- QUIÉNES SOMOS -->
   <section class="section-light" id="nosotros">
     <h2>Quiénes somos</h2>
     <p>Somos especialistas en procesos, tecnología e inteligencia artificial aplicada. Nos enfocamos en diseñar soluciones concretas que ordenan la operación de tu negocio.</p>
   </section>
 
-  <!-- Qué hacemos -->
-  <section class="section-dark" id="servicios">
-    <h2>Qué hacemos</h2>
-    <p>Desde CRMs inteligentes hasta dashboards operativos, construimos herramientas a medida que escalan con vos.</p>
-
-    <div class="split-section">
-      <div class="split-text">
-        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4S14.21 4 12 4s-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-        <h3>CRM con Inteligencia Artificial</h3>
-        <p>Gestioná tus contactos, interacciones y oportunidades con un sistema inteligente que aprende y automatiza tareas repetitivas.</p>
-      </div>
-      <div class="split-image">
-        <img src="https://via.placeholder.com/600x400.png?text=Mockup+CRM" alt="Mockup CRM con IA">
-      </div>
+  <!-- SERVICIOS SCROLL STORYTELLING -->
+  <section class="services-section" id="servicios">
+    <div class="service-block">
+      <h2 class="service-title">CRM con Inteligencia Artificial</h2>
+    </div>
+    <div class="service-block">
+      <p class="service-description">Gestioná tus contactos, interacciones y oportunidades con un sistema inteligente que aprende y automatiza tareas repetitivas.</p>
     </div>
 
-    <div class="cards">
-      <div class="card">Tableros<br/><small>Indicadores para clínicas, hoteles y más.</small></div>
-      <div class="card">Integraciones<br/><small>Automatizamos tareas y conectamos tus sistemas.</small></div>
-      <div class="card">Procesos<br/><small>Diseñamos flujos eficientes a medida.</small></div>
+    <div class="service-block">
+      <h2 class="service-title">Dashboards Operativos</h2>
+    </div>
+    <div class="service-block">
+      <p class="service-description">Visualizá métricas claves en tiempo real con dashboards personalizados para tu negocio.</p>
+    </div>
+
+    <div class="service-block">
+      <h2 class="service-title">Integraciones Automatizadas</h2>
+    </div>
+    <div class="service-block">
+      <p class="service-description">Conectamos tus sistemas y automatizamos tareas repetitivas para que tu equipo se enfoque en lo importante.</p>
+    </div>
+
+    <div class="service-block">
+      <h2 class="service-title">Optimización de Procesos</h2>
+    </div>
+    <div class="service-block">
+      <p class="service-description">Diseñamos flujos eficientes y escalables que aumentan la productividad y reducen errores operativos.</p>
     </div>
   </section>
 
-  <!-- Contacto -->
+  <!-- CONTACTO -->
   <section class="hero" id="contacto">
     <h2>¿Querés ver cómo aplicar esto en tu negocio?</h2>
     <p>Contanos qué querés ordenar y te devolvemos una propuesta concreta.</p>
@@ -287,21 +256,15 @@
   </footer>
 
   <script>
-    const cards = document.querySelectorAll('.card');
-    const images = document.querySelectorAll('.split-image');
-
-    const observer = new IntersectionObserver((entries) => {
+    // Animación de aparición suave en servicios
+    const blocks = document.querySelectorAll('.service-block');
+    const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        if(entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        } else {
-          entry.target.classList.remove('visible');
-        }
+        entry.target.classList.toggle('in-view', entry.isIntersecting);
       });
-    }, { threshold: 0.2 });
+    }, { threshold: 0.6 });
 
-    cards.forEach(card => observer.observe(card));
-    images.forEach(img => observer.observe(img));
+    blocks.forEach(block => observer.observe(block));
   </script>
 
 </body>
