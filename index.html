@@ -3,49 +3,41 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Omnia · Procesos claros, equipo más libre</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <title>Omnia · Transformación Digital</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-
   <style>
     :root {
       --brand: #ffbf00;
-      --bg: #f8f8f8;
-      --dark: #1b1b1b;
-      --gray: #888;
-      --radius: 20px;
-      --shadow: 0 10px 20px rgba(0,0,0,0.05);
+      --bg-gradient: linear-gradient(135deg, #14002c, #280247);
       --max-width: 1100px;
+      --radius: 20px;
     }
 
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      margin: 0;
       font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--dark);
+      background: var(--bg-gradient);
+      color: #fff;
       line-height: 1.6;
+      overflow-x: hidden;
     }
 
     header {
-      background: white;
-      padding: 20px 30px;
-      box-shadow: var(--shadow);
-      position: sticky;
+      position: fixed;
       top: 0;
-      z-index: 100;
-    }
-
-    nav {
+      width: 100%;
+      background: rgba(0,0,0,0.4);
+      padding: 20px 30px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      max-width: var(--max-width);
-      margin: 0 auto;
+      z-index: 1000;
+      backdrop-filter: blur(8px);
     }
 
     .logo {
@@ -53,260 +45,160 @@
       font-size: 1.4rem;
     }
 
-    .nav-links a {
+    nav a {
+      color: #fff;
       margin-left: 20px;
       text-decoration: none;
-      color: var(--dark);
       font-weight: 500;
     }
 
     .hero {
-      max-width: var(--max-width);
-      margin: 60px auto;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
       padding: 0 20px;
+      background: radial-gradient(circle at bottom left, #31005f, #11001d);
+      position: relative;
+      overflow: hidden;
     }
 
     .hero h1 {
-      font-size: 2.8rem;
-      margin-bottom: 14px;
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 20px;
     }
 
     .hero p {
-      font-size: 1.1rem;
-      color: var(--gray);
+      font-size: 1.2rem;
+      max-width: 600px;
       margin-bottom: 30px;
+      color: #d0d0d0;
     }
 
     .btn {
-      background: var(--brand);
-      color: black;
-      padding: 14px 24px;
+      padding: 14px 28px;
       border-radius: 999px;
-      border: none;
+      background: #fff;
+      color: #000;
       font-weight: 600;
       font-size: 1rem;
-      cursor: pointer;
       text-decoration: none;
-      transition: background 0.3s ease, transform 0.2s ease;
-      display: inline-block;
-      margin: 6px;
+      transition: all 0.3s ease;
     }
 
     .btn:hover {
-      background: linear-gradient(to right, #ffd300, #ffb700);
+      background: var(--brand);
+      color: #000;
       transform: translateY(-2px);
     }
 
-    .section {
-      padding: 60px 20px;
-      max-width: var(--max-width);
-      margin: 0 auto;
-      text-align: center;
+    /* Abstract SVG curves */
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -100px;
+      left: -100px;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle at center, rgba(255, 0, 200, 0.15), transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+      animation: float 12s ease-in-out infinite alternate;
     }
 
-    .section h2 {
-      font-size: 2rem;
-      margin-bottom: 10px;
+    .hero::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle at center, rgba(255, 255, 255, 0.05), transparent 80%);
+      border-radius: 50%;
+      z-index: 0;
     }
 
-    .section p {
-      color: var(--gray);
-      max-width: 600px;
-      margin: 0 auto 40px;
-    }
-
-    .cards-3 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-    }
-
-    .card {
-      background: white;
-      border-radius: var(--radius);
-      padding: 26px;
-      box-shadow: var(--shadow);
-      text-align: left;
-    }
-
-    .card h3 {
-      margin-top: 10px;
-      font-size: 1.2rem;
-    }
-
-    .card p {
-      color: var(--gray);
-    }
-
-    footer {
-      background: #fafafa;
-      padding: 40px 20px;
-      text-align: center;
-      font-size: 0.9rem;
-      color: #aaa;
-      margin-top: 60px;
-    }
-
-    /* Full-width dark section wrapper */
-    .full-width-dark {
-      background: var(--dark);
-      color: #fff;
-      width: 100vw;
+    .hero > * {
       position: relative;
-      left: 50%;
-      right: 50%;
-      margin-left: -50vw;
-      margin-right: -50vw;
+      z-index: 1;
     }
 
-    .full-width-dark .section {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 60px 20px;
-    }
-
-    .full-width-dark .card {
-      background: #2a2a2a;
-      color: #fff;
-    }
-
-    .full-width-dark .card p {
-      color: #ccc;
-    }
-
-    /* Scroll animations */
-    .fade-in-up {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
-
-    .fade-in-up.visible {
-      opacity: 1;
-      transform: none;
-    }
-
-    .section-divider {
-      height: 60px;
-      background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.05));
-    }
-
-    .section-divider.dark {
-      background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.06));
+    @keyframes float {
+      0% { transform: translateY(0px) scale(1); }
+      100% { transform: translateY(-20px) scale(1.05); }
     }
 
     @media (max-width: 600px) {
       .hero h1 {
         font-size: 2rem;
       }
-
       .btn {
         width: 100%;
+        max-width: 280px;
       }
+    }
+
+    /* Example sections after hero */
+    section {
+      padding: 80px 20px;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    section h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    section p {
+      color: #ccc;
+      max-width: 700px;
+      margin-bottom: 30px;
     }
   </style>
 </head>
 <body>
 
   <header>
+    <div class="logo">OMNIA</div>
     <nav>
-      <div class="logo">Omnia</div>
-      <div class="nav-links">
-        <a href="#inicio">Inicio</a>
-        <a href="#como-empezar">Empezar</a>
-        <a href="#nosotros">Nosotros</a>
-        <a href="#servicios">Servicios</a>
-        <a href="#contacto">Contacto</a>
-      </div>
+      <a href="#inicio">Inicio</a>
+      <a href="#contacto">Contáctanos</a>
     </nav>
   </header>
 
   <!-- HERO -->
-  <section class="hero fade-in-up" id="inicio">
-    <h1>Tu negocio, más simple. Sin que hagas todo.</h1>
-    <p>Consultoría + soluciones con IA. Diseñamos cómo trabajás y lo convertimos en sistema: orden, visibilidad y tiempo.</p>
-    <a class="btn" href="#contacto">Quiero una llamada</a>
-    <a class="btn" href="mailto:admin@omniarg.com">Escribir por correo</a>
+  <section class="hero" id="inicio">
+    <h1>Su socio en transformación digital</h1>
+    <p>Impulsando la innovación y el crecimiento a través de soluciones digitales a medida.</p>
+    <a href="#contacto" class="btn">Contáctanos</a>
   </section>
 
-  <div class="section-divider"></div>
-
-  <!-- CÓMO EMPEZAR -->
-  <div class="full-width-dark">
-    <section class="section fade-in-up" id="como-empezar">
-      <h2>Cómo empezar</h2>
-      <p>Tres pasos simples para poner orden y liberar tiempo.</p>
-      <div class="cards-3">
-        <div class="card fade-in-up"><h3>Paso 1 · Agendá una llamada</h3><p>Te conocemos, entendemos tu operación y priorizamos juntos.</p></div>
-        <div class="card fade-in-up"><h3>Paso 2 · Diseñamos la solución</h3><p>Te mostramos cómo va a funcionar y qué impacto tendrá.</p></div>
-        <div class="card fade-in-up"><h3>Paso 3 · Lo ponemos en marcha</h3><p>Construimos, conectamos y mejoramos a medida que usás.</p></div>
-      </div>
-    </section>
-  </div>
-
-  <div class="section-divider dark"></div>
-
-  <!-- NOSOTROS -->
-  <section class="section fade-in-up" id="nosotros">
-    <h2>No vendemos “sistemas”</h2>
-    <p>Primero entendemos tu día a día. Luego priorizamos. Después construimos lo justo y necesario.</p>
-    <div class="cards-3">
-      <div class="card"><h3>Enfoque humano</h3><p>Te escuchamos. Sin paquetes cerrados.</p></div>
-      <div class="card"><h3>De punta a punta</h3><p>Nos ocupamos del qué y del cómo.</p></div>
-      <div class="card"><h3>Escalable</h3><p>Paneles, CRM, apps y flujos que evolucionan con vos.</p></div>
-    </div>
+  <!-- SOBRE NOSOTROS -->
+  <section id="nosotros">
+    <h2>Quiénes somos</h2>
+    <p>Somos especialistas en procesos, tecnología e inteligencia artificial aplicada. Nos enfocamos en diseñar soluciones concretas que ordenan la operación de tu negocio.</p>
   </section>
 
-  <div class="section-divider"></div>
-
-  <!-- SERVICIOS — FIXED FULL-WIDTH DARK -->
-  <div class="full-width-dark">
-    <section class="section fade-in-up" id="servicios">
-      <h2>Qué hacemos</h2>
-      <p>Soluciones que resuelven problemas reales hoy.</p>
-      <div class="cards-3">
-        <div class="card fade-in-up"><h3>CRM con IA</h3><p>Contactos, historial y seguimiento inteligente.</p></div>
-        <div class="card fade-in-up"><h3>Tableros</h3><p>Indicadores claros para clínicas, talleres, hoteles e inmobiliarias.</p></div>
-        <div class="card fade-in-up"><h3>Apps internas</h3><p>Carga de datos, turnos e informes sin fricción.</p></div>
-        <div class="card fade-in-up"><h3>Flujos entre áreas</h3><p>Ventas, operación y administración conectadas.</p></div>
-        <div class="card fade-in-up"><h3>Integraciones</h3><p>Chau copiar/pegar. Datos donde deben estar.</p></div>
-        <div class="card fade-in-up"><h3>Mejora de procesos</h3><p>Qué ordenar, qué automatizar y en qué orden.</p></div>
-      </div>
-    </section>
-  </div>
-
-  <div class="section-divider dark"></div>
+  <!-- SERVICIOS -->
+  <section id="servicios">
+    <h2>Qué hacemos</h2>
+    <p>Desde CRMs inteligentes hasta dashboards operativos, construimos herramientas a medida que escalan con vos.</p>
+  </section>
 
   <!-- CONTACTO -->
-  <section class="section fade-in-up" id="contacto">
-    <h2>¿Lo vemos?</h2>
-    <p>Contanos qué querés ordenar y te devolvemos el plan.</p>
-    <a class="btn" href="mailto:admin@omniarg.com">Escribir por correo</a>
-    <a class="btn" href="https://wa.me/549XXXXXXXXXX?text=Hola%20Omnia%2C%20quiero%20ordenar%20mi%20operaci%C3%B3n.">WhatsApp</a>
+  <section id="contacto">
+    <h2>¿Querés ver cómo aplicar esto en tu negocio?</h2>
+    <p>Contanos qué querés ordenar y te devolvemos un plan claro: qué va primero y qué impacto esperar.</p>
+    <a href="mailto:admin@omniarg.com" class="btn">Escribir por correo</a>
   </section>
 
-  <footer>
+  <footer style="text-align:center;padding:40px 20px;color:#777;font-size:0.9rem">
     © 2025 Omnia — Procesos claros, equipo más libre.
   </footer>
 
-  <!-- Scroll animation script -->
-  <script>
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    document.querySelectorAll('.fade-in-up').forEach(el => {
-      observer.observe(el);
-    });
-  </script>
 </body>
 </html>
