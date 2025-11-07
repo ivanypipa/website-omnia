@@ -8,12 +8,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --violeta-dark: #1a0033;
-      --violeta-mid: #3b0a66;
-      --violeta-light: #6a0dad;
       --accent: #b366ff;
-      --gris-claro: #f0f0f5;
-      --gris-oscuro: #111;
+      --bg-dark: #0e0e0e;
+      --text-light: #fff;
+      --text-muted: #ccc;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -21,7 +19,7 @@
     body {
       font-family: 'Inter', sans-serif;
       background-color: #0b001a;
-      color: white;
+      color: var(--text-light);
       scroll-behavior: smooth;
     }
 
@@ -44,7 +42,6 @@
       font-weight: 500;
       transition: opacity 0.3s;
     }
-
     nav a:hover { opacity: 0.7; }
 
     section { padding: 5rem 2rem; }
@@ -80,18 +77,18 @@
     .wave { display: block; width: 100%; height: auto; }
 
     .section-light {
-      background-color: var(--gris-claro);
-      color: var(--gris-oscuro);
+      background-color: #f0f0f5;
+      color: #111;
       text-align: center;
     }
 
-    /* SERVICIOS */
+    /* === SERVICIOS === */
     .services {
-      background-color: #0e0e0e;
-      color: #fff;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
       padding: 6rem 3rem;
       font-family: 'Inter', sans-serif;
-      max-width: 900px;
+      max-width: 1000px;
       margin: 0 auto;
     }
 
@@ -103,21 +100,24 @@
     }
 
     .service {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1rem;
       margin-bottom: 6rem;
       text-align: left;
-      position: relative;
+      transition: all 0.6s ease;
     }
 
     .service-title {
       font-size: clamp(1.8rem, 3vw, 2.4rem);
       color: var(--accent);
       font-weight: 600;
-      margin-bottom: 1rem;
     }
 
     .service-description {
       font-size: 1.1rem;
-      color: #ccc;
+      color: var(--text-muted);
       line-height: 1.6;
       opacity: 0;
       transform: translateY(20px);
@@ -125,21 +125,16 @@
       max-width: 700px;
     }
 
-    .service.in-view .service-description {
+    .service.active .service-description {
       opacity: 1;
       transform: translateY(0);
+      transition-delay: 0.15s;
     }
 
     @media (max-width: 768px) {
-      .services {
-        padding: 4rem 1.5rem;
-      }
-      .service-title {
-        font-size: 1.6rem;
-      }
-      .service-description {
-        font-size: 1rem;
-      }
+      .services { padding: 4rem 1.5rem; }
+      .service-title { font-size: 1.6rem; }
+      .service-description { font-size: 1rem; }
     }
 
     /* CONTACTO */
@@ -245,19 +240,30 @@
   </footer>
 
   <script>
-    // IntersectionObserver para revelar servicios progresivamente
+    // === IntersectionObserver avanzado ===
     const services = document.querySelectorAll(".service");
 
     const observer = new IntersectionObserver((entries) => {
+      // Encontrar el servicio más visible
+      let activeEntry = null;
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          // quitar in-view de todos
-          services.forEach(s => s.classList.remove("in-view"));
-          // agregar solo al que está más visible
-          entry.target.classList.add("in-view");
+          if (!activeEntry || entry.intersectionRatio > activeEntry.intersectionRatio) {
+            activeEntry = entry;
+          }
         }
       });
-    }, { threshold: 0.6 });
+
+      if (activeEntry) {
+        // Remover active de todos
+        services.forEach(s => s.classList.remove("active"));
+        // Agregar active solo al más visible
+        activeEntry.target.classList.add("active");
+      }
+    }, {
+      threshold: [0.5, 0.75], // activa cuando el bloque está 50-75% visible
+      rootMargin: "-10% 0px -10% 0px"
+    });
 
     services.forEach(service => observer.observe(service));
   </script>
