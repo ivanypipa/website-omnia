@@ -3,217 +3,223 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Omnia</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <title>OMNIA — Consultoría Digital</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --accent: #b366ff;
-      --bg-dark: #0e0e0e;
-      --text-light: #fff;
-      --text-muted: #ccc;
+      --violeta: #6F3AFF;
+      --azul: #00C6FF;
+      --violeta-brillante: #8F63FF;
+      --fondo-oscuro: #0B0C10;
+      --superficie: #141620;
+      --texto-principal: #FFFFFF;
+      --texto-secundario: #B8B8CC;
+      --verde-menta: #4DFFB8;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    body {
+    html, body {
+      height: 100%;
       font-family: 'Inter', sans-serif;
-      background-color: #0b001a;
-      color: var(--text-light);
+      background: radial-gradient(circle at 30% 50%, #141620 0%, #0B0C10 80%);
+      background-attachment: fixed;
+      color: var(--texto-principal);
       scroll-behavior: smooth;
+      overflow-x: hidden;
     }
 
     header {
-      background: #0b001a;
-      color: white;
+      background: rgba(11,12,16,0.85);
+      backdrop-filter: blur(8px);
       padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
       position: sticky;
       top: 0;
       z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header strong {
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--texto-principal);
+      letter-spacing: 0.5px;
     }
 
     nav a {
-      color: white;
+      color: var(--texto-principal);
       text-decoration: none;
       margin-left: 2rem;
       font-weight: 500;
       transition: opacity 0.3s;
     }
+
     nav a:hover { opacity: 0.7; }
 
-    section { padding: 5rem 2rem; }
-
-    /* HERO */
-    .hero {
-      background: linear-gradient(135deg, #1a0033, #6a0dad);
-      color: white;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-
-    .hero h1 { font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 1rem; }
-    .hero p { font-size: 1.2rem; margin-bottom: 2rem; }
-
-    .btn {
-      background: white;
-      color: #111;
-      border: none;
-      padding: 0.9rem 1.8rem;
-      font-weight: 600;
-      border-radius: 999px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .btn:hover { background: #e0e0e0; transform: scale(1.05); }
-
-    .wave { display: block; width: 100%; height: auto; }
-
-    .section-light {
-      background-color: #f0f0f5;
-      color: #111;
-      text-align: center;
-    }
-
-    /* === SERVICIOS === */
-    .services {
-      background-color: var(--bg-dark);
-      color: var(--text-light);
-      padding: 6rem 3rem;
-      font-family: 'Inter', sans-serif;
+    section {
+      padding: 6rem 2rem;
       max-width: 1100px;
       margin: 0 auto;
     }
 
-    .services h2 {
-      font-size: clamp(2rem, 4vw, 2.4rem);
-      margin-bottom: 4rem;
-      text-align: left;
-      color: var(--accent);
-    }
-
-    .service {
+    /* HERO */
+    .hero {
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: 1rem;
-      margin-bottom: 7rem;
       text-align: left;
-      transition: all 0.6s ease;
-      position: relative;
+      animation: fadeIn 1.5s ease;
     }
 
-    /* FUTURO LAYOUT 2 COLUMNAS */
-    .service-content {
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
-      gap: 3rem;
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      line-height: 1.1;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(90deg, var(--violeta), var(--azul));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    .service-text {
-      flex: 1;
-    }
-
-    .service-image {
-      flex: 1;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.6s ease;
-    }
-
-    .service.active .service-image {
-      opacity: 1;
-      transform: translateY(0);
-      transition-delay: 0.3s;
-    }
-
-    .service-title {
-      font-size: clamp(1.8rem, 3vw, 2.4rem);
-      color: var(--accent);
-      font-weight: 600;
-      margin-bottom: 1rem;
-    }
-
-    .service-description {
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.7s ease;
+    .hero p {
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      color: var(--texto-secundario);
+      margin-bottom: 2.5rem;
       max-width: 700px;
     }
 
-    .service.active .service-description {
+    .cta-btn {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--violeta), var(--azul));
+      color: #fff;
+      font-weight: 600;
+      padding: 0.9rem 1.8rem;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 12px rgba(111, 58, 255, 0.5);
+    }
+
+    /* SCROLL EFFECTS */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-in.visible {
       opacity: 1;
       transform: translateY(0);
-      transition-delay: 0.15s;
     }
 
-    @media (max-width: 768px) {
-      .services { padding: 4rem 1.5rem; }
-      .service-content { flex-direction: column; gap: 1.5rem; }
-      .service-title { font-size: 1.6rem; }
-      .service-description { font-size: 1rem; }
+    /* SECTION TITLES */
+    h2.section-title {
+      font-size: clamp(2rem, 4vw, 2.4rem);
+      margin-bottom: 2rem;
+      color: var(--violeta);
+      position: relative;
     }
 
-    /* CONTACTO */
-    .contact-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-top: 2rem;
+    h2.section-title::after {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--violeta), var(--azul));
+      margin-top: 0.5rem;
+      border-radius: 3px;
     }
 
-    .contact-buttons a {
-      background: white;
-      color: #111;
-      text-decoration: none;
-      padding: 0.8rem 1.5rem;
-      border-radius: 999px;
-      font-weight: 600;
-      transition: background 0.3s, transform 0.3s;
+    /* TEXT SECTIONS */
+    .text-block {
+      margin-bottom: 4rem;
+      color: var(--texto-secundario);
+      font-size: 1.1rem;
+      line-height: 1.8;
+      max-width: 800px;
     }
 
-    .contact-buttons a:hover {
-      background: #ddd;
-      transform: translateY(-3px);
+    /* SERVICES */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .service {
+      background: var(--superficie);
+      border-radius: 12px;
+      padding: 2rem;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .service:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px rgba(111, 58, 255, 0.1);
+    }
+
+    .service h3 {
+      font-size: 1.4rem;
+      color: var(--violeta-brillante);
+      margin-bottom: 0.8rem;
+    }
+
+    .service p {
+      color: var(--texto-secundario);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    /* CTA SECTION */
+    .cta-section {
+      text-align: center;
+      padding: 6rem 2rem;
+    }
+
+    .cta-section h2 {
+      font-size: clamp(2rem, 4vw, 2.4rem);
+      color: var(--texto-principal);
+      margin-bottom: 1rem;
+    }
+
+    .cta-section p {
+      font-size: 1.2rem;
+      color: var(--texto-secundario);
+      margin-bottom: 2rem;
     }
 
     footer {
       text-align: center;
+      padding: 2rem;
       background: #000;
-      color: #ccc;
+      color: var(--texto-secundario);
       font-size: 0.9rem;
-      padding: 1.5rem;
     }
 
-    /* Línea de referencia visual opcional (puedes quitarla si querés) */
-    /* .scroll-marker {
-      position: fixed;
-      top: 60%;
-      left: 0;
-      width: 100%;
-      height: 1px;
-      background: rgba(255,255,255,0.1);
-      pointer-events: none;
-      z-index: 999;
-    } */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      header { flex-direction: column; }
+      nav a { margin: 1rem 1rem 0 0; display: inline-block; }
+    }
   </style>
 </head>
+
 <body>
 
   <header>
-    <div><strong>OMNIA</strong></div>
+    <strong>OMNIA</strong>
     <nav>
       <a href="#inicio">Inicio</a>
       <a href="#nosotros">Nosotros</a>
@@ -224,111 +230,81 @@
 
   <!-- HERO -->
   <section class="hero" id="inicio">
-    <h1>Su socio en transformación digital</h1>
-    <p>Impulsando la innovación y el crecimiento a través de soluciones digitales a medida.</p>
-    <a href="#contacto" class="btn">Contáctanos</a>
+    <h1>Consultoría digital especializada en pymes y empresas en crecimiento.</h1>
+    <p>Ordenamos la operación diaria, los procesos y la tecnología para que el crecimiento no se convierta en desorden.</p>
+    <a href="#contacto" class="cta-btn">Hablemos de tu operación actual</a>
   </section>
 
-  <!-- WAVE -->
-  <svg class="wave" viewBox="0 0 1440 100">
-    <path fill="#f0f0f5" d="M0,0 C480,100 960,0 1440,100 L1440,0 L0,0 Z"></path>
-  </svg>
-
   <!-- QUIÉNES SOMOS -->
-  <section class="section-light" id="nosotros">
-    <h2>Quiénes somos</h2>
-    <p>Somos especialistas en procesos, tecnología e inteligencia artificial aplicada. Nos enfocamos en diseñar soluciones concretas que ordenan la operación de tu negocio.</p>
+  <section id="nosotros" class="fade-in">
+    <h2 class="section-title">Quiénes somos</h2>
+    <div class="text-block">
+      <p>OMNIA es una consultora digital que ayuda a empresas a ordenar su operación y sus procesos. Diseñamos soluciones tecnológicas a medida, partiendo siempre del problema — no del producto.</p>
+      <p>Según la situación, la respuesta puede ser un sistema de gestión, una automatización, una app interna o la integración de canales como WhatsApp con Kaption.</p>
+      <p class="highlight">La solución correcta depende del problema.</p>
+    </div>
   </section>
 
   <!-- SERVICIOS -->
-  <section class="services" id="servicios">
-    <h2>Servicios</h2>
-
-    <div class="service">
-      <div class="service-content">
-        <div class="service-text">
-          <h3 class="service-title">CRM con Inteligencia Artificial</h3>
-          <p class="service-description">Gestioná tus contactos, interacciones y oportunidades con un sistema inteligente que aprende y automatiza tareas repetitivas.</p>
-        </div>
-        <div class="service-image">
-          <!-- Imagen futura -->
-        </div>
+  <section id="servicios" class="fade-in">
+    <h2 class="section-title">Cómo lo hacemos</h2>
+    <div class="services-grid">
+      <div class="service">
+        <h3>Consultoría en procesos y operación</h3>
+        <p>Analizamos cómo funciona hoy el negocio y detectamos dónde se genera el desorden.</p>
       </div>
-    </div>
-
-    <div class="service">
-      <div class="service-content">
-        <div class="service-text">
-          <h3 class="service-title">Dashboards Operativos</h3>
-          <p class="service-description">Visualizá métricas claves en tiempo real con dashboards personalizados para tu negocio.</p>
-        </div>
-        <div class="service-image"></div>
+      <div class="service">
+        <h3>Diseño de soluciones digitales a medida</h3>
+        <p>Definimos la mejor arquitectura posible según el problema: sistemas, apps, automatizaciones o integraciones.</p>
       </div>
-    </div>
-
-    <div class="service">
-      <div class="service-content">
-        <div class="service-text">
-          <h3 class="service-title">Integraciones Automatizadas</h3>
-          <p class="service-description">Conectamos tus sistemas y automatizamos tareas repetitivas para que tu equipo se enfoque en lo importante.</p>
-        </div>
-        <div class="service-image"></div>
+      <div class="service">
+        <h3>Implementación de sistemas de gestión</h3>
+        <p>Construimos ERPs simples, claros y adaptados al flujo real de la empresa.</p>
       </div>
-    </div>
-
-    <div class="service">
-      <div class="service-content">
-        <div class="service-text">
-          <h3 class="service-title">Optimización de Procesos</h3>
-          <p class="service-description">Diseñamos flujos eficientes y escalables que aumentan la productividad y reducen errores operativos.</p>
-        </div>
-        <div class="service-image"></div>
+      <div class="service">
+        <h3>Automatización e integración de herramientas</h3>
+        <p>Conectamos sistemas, eliminamos tareas manuales y ordenamos los flujos de información.</p>
+      </div>
+      <div class="service">
+        <h3>Canales de atención y WhatsApp (Kaption)</h3>
+        <p>Integramos canales de contacto como parte del sistema operativo del negocio.</p>
       </div>
     </div>
   </section>
 
-  <!-- CONTACTO -->
-  <section class="hero" id="contacto">
-    <h2>¿Querés ver cómo aplicar esto en tu negocio?</h2>
-    <p>Contanos qué querés ordenar y te devolvemos una propuesta concreta.</p>
-    <div class="contact-buttons">
-      <a href="mailto:info@omnia.com">Escribir por correo</a>
-      <a href="https://wa.me/5491124016245" target="_blank">Escribir por WhatsApp</a>
-    </div>
+  <!-- CTA FINAL -->
+  <section class="cta-section fade-in" id="contacto">
+    <h2>Veamos juntos dónde se está generando el desorden</h2>
+    <p>Una conversación breve alcanza para entender cómo funciona hoy tu operación y qué se puede ordenar.</p>
+    <a href="mailto:info@omnia.com" class="cta-btn">Hablemos de cómo está funcionando hoy tu operación</a>
   </section>
 
   <footer>
-    © 2025 Omnia — Procesos claros, equipo más libre.
+    © 2025 OMNIA — Procesos claros, equipo más libre.
   </footer>
 
-  <!-- <div class="scroll-marker"></div> -->
-
   <script>
-    // IntersectionObserver controlado
-    const services = document.querySelectorAll('.service');
-    const options = {
-      root: null,
-      threshold: 0,
-      rootMargin: "-50% 0px -50% 0px" // Activa cuando el centro del bloque cruza el centro del viewport
-    };
+    // IntersectionObserver para animaciones de scroll
+    const fadeElements = document.querySelectorAll('.fade-in');
 
-    let activeService = null;
-
-    const observer = new IntersectionObserver((entries) => {
+    const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          // Si un nuevo bloque entra al punto medio, activar solo ese
-          if (activeService !== entry.target) {
-            services.forEach(s => s.classList.remove('active'));
-            entry.target.classList.add('active');
-            activeService = entry.target;
-          }
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
         }
       });
-    }, options);
+    }, { threshold: 0.2 });
 
-    services.forEach(service => observer.observe(service));
+    fadeElements.forEach(el => observer.observe(el));
+
+    // Zoom-out hero al hacer scroll
+    const hero = document.querySelector('.hero');
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      hero.style.transform = `scale(${1 - scrollY / 5000})`;
+      hero.style.opacity = `${1 - scrollY / 1200}`;
+    });
   </script>
-
 </body>
 </html>
