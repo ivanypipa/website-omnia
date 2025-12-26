@@ -3,308 +3,1150 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="OMNIA — Consultoría digital para pymes y empresas en crecimiento. Ordenamos procesos, operación y tecnología para escalar sin caos." />
   <title>OMNIA — Consultoría Digital</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --violeta: #6F3AFF;
       --azul: #00C6FF;
       --violeta-brillante: #8F63FF;
+
       --fondo-oscuro: #0B0C10;
-      --superficie: #141620;
+      --superficie: rgba(20, 22, 32, 0.72);
+      --superficie-2: rgba(20, 22, 32, 0.52);
+      --borde: rgba(255,255,255,0.10);
+      --borde-2: rgba(255,255,255,0.08);
+
       --texto-principal: #FFFFFF;
       --texto-secundario: #B8B8CC;
       --verde-menta: #4DFFB8;
+
+      --shadow: 0 18px 60px rgba(0,0,0,0.45);
+      --shadow-soft: 0 10px 30px rgba(0,0,0,0.35);
+
+      --radius: 18px;
+      --radius-lg: 26px;
+
+      --container: 1120px;
+
+      --ease: cubic-bezier(.2,.8,.2,1);
+      --ease2: cubic-bezier(.16, 1, .3, 1);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; }
 
     html, body {
       height: 100%;
       font-family: 'Inter', sans-serif;
-      background: radial-gradient(circle at 30% 50%, #141620 0%, #0B0C10 80%);
+      background: radial-gradient(1200px 700px at 18% 35%, rgba(111, 58, 255, 0.22), transparent 60%),
+                  radial-gradient(1000px 600px at 75% 20%, rgba(0, 198, 255, 0.18), transparent 55%),
+                  radial-gradient(900px 600px at 70% 80%, rgba(77, 255, 184, 0.08), transparent 55%),
+                  linear-gradient(180deg, #0B0C10 0%, #0B0C10 100%);
       background-attachment: fixed;
       color: var(--texto-principal);
       scroll-behavior: smooth;
       overflow-x: hidden;
     }
 
+    ::selection { background: rgba(111,58,255,0.35); color: var(--texto-principal); }
+
+    /* ====== LAYOUT ====== */
+    .container { max-width: var(--container); margin: 0 auto; padding: 0 20px; }
+    section { padding: 76px 0; position: relative; }
+    @media (max-width: 768px) { section { padding: 58px 0; } }
+
+    /* ====== DECOR ====== */
+    .bg-orbs {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+    .orb {
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      filter: blur(34px);
+      opacity: 0.55;
+      border-radius: 999px;
+      transform: translate3d(0,0,0);
+      will-change: transform;
+      mix-blend-mode: screen;
+    }
+    .orb.one { left: -260px; top: -240px; background: radial-gradient(circle at 40% 40%, rgba(111,58,255,0.9), rgba(111,58,255,0) 65%); }
+    .orb.two { right: -280px; top: -220px; background: radial-gradient(circle at 35% 35%, rgba(0,198,255,0.85), rgba(0,198,255,0) 62%); }
+    .orb.three { right: -260px; bottom: -260px; background: radial-gradient(circle at 45% 45%, rgba(77,255,184,0.55), rgba(77,255,184,0) 62%); }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.08;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+      background-size: 180px 180px;
+      mix-blend-mode: overlay;
+    }
+
+    /* ====== HEADER ====== */
     header {
-      background: rgba(11,12,16,0.85);
-      backdrop-filter: blur(8px);
-      padding: 1rem 2rem;
       position: sticky;
       top: 0;
-      z-index: 1000;
+      z-index: 50;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: rgba(11, 12, 16, 0.62);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .nav {
       display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      gap: 14px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      user-select: none;
+    }
+    .logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--violeta), var(--azul));
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.10) inset, 0 14px 30px rgba(111, 58, 255, 0.20);
+    }
+    .brand strong {
+      letter-spacing: 0.6px;
+      font-weight: 800;
+      font-size: 1.05rem;
+    }
+    .pill {
+      display: none;
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--texto-secundario);
+    }
+    @media (min-width: 980px) {
+      .pill { display: inline-flex; align-items: center; gap: 8px; }
+      .pill .dot {
+        width: 7px; height: 7px; border-radius: 99px;
+        background: var(--verde-menta);
+        box-shadow: 0 0 0 6px rgba(77,255,184,0.12);
+      }
+    }
+
+    nav .links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    nav a.link {
+      text-decoration: none;
+      color: rgba(255,255,255,0.86);
+      font-weight: 600;
+      font-size: 14px;
+      padding: 10px 10px;
+      border-radius: 12px;
+      transition: background 220ms var(--ease), color 220ms var(--ease), transform 220ms var(--ease);
+    }
+    nav a.link:hover { background: rgba(255,255,255,0.06); transform: translateY(-1px); }
+    nav a.link:focus-visible { outline: 2px solid rgba(0,198,255,0.6); outline-offset: 2px; }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-decoration: none;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      padding: 11px 16px;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 1;
+      transition: transform 220ms var(--ease), box-shadow 220ms var(--ease), background 220ms var(--ease), border-color 220ms var(--ease);
+      will-change: transform;
+      user-select: none;
+      white-space: nowrap;
+    }
+    .btn svg { width: 16px; height: 16px; opacity: .92; }
+    .btn-primary {
+      background: linear-gradient(90deg, var(--violeta), var(--azul));
+      color: #fff;
+      box-shadow: 0 10px 30px rgba(111, 58, 255, 0.22);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 44px rgba(111, 58, 255, 0.28); }
+    .btn-ghost {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.90);
+    }
+    .btn-ghost:hover { transform: translateY(-2px); background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.18); }
+    .btn:focus-visible { outline: 2px solid rgba(143, 99, 255, 0.7); outline-offset: 2px; }
+
+    .menu-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      cursor: pointer;
+      transition: transform 220ms var(--ease), background 220ms var(--ease);
+    }
+    .menu-btn:hover { transform: translateY(-1px); background: rgba(255,255,255,0.06); }
+    .menu-btn:focus-visible { outline: 2px solid rgba(0,198,255,0.6); outline-offset: 2px; }
+    .menu-btn svg { width: 20px; height: 20px; }
+
+    @media (min-width: 920px) {
+      .menu-btn { display: none; }
+    }
+
+    .mobile-panel {
+      display: none;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      background: rgba(11, 12, 16, 0.86);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .mobile-panel.open { display: block; }
+    .mobile-panel .inner {
+      padding: 12px 0 18px;
+      display: grid;
+      gap: 10px;
+    }
+    .mobile-panel a.link { display: block; width: 100%; }
+    .mobile-panel .nav-cta { display: grid; grid-template-columns: 1fr; gap: 10px; padding-top: 6px; }
+
+    @media (max-width: 919px) {
+      nav .links, .nav-cta { display: none; }
+    }
+
+    /* ====== TYPO ====== */
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      color: rgba(255,255,255,0.86);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: .2px;
+    }
+    .eyebrow .spark {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--violeta), var(--azul));
+      box-shadow: 0 0 0 7px rgba(111,58,255,0.14);
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+    }
+    .gradient-text {
+      background: linear-gradient(90deg, var(--violeta), var(--azul));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    p.lead {
+      font-size: clamp(1.05rem, 2.2vw, 1.28rem);
+      line-height: 1.6;
+      color: var(--texto-secundario);
+      max-width: 720px;
+    }
+
+    .section-head {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 26px;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 3.2vw, 2.15rem);
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+    }
+    .section-subtitle {
+      color: var(--texto-secundario);
+      line-height: 1.6;
+      max-width: 760px;
+    }
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, rgba(111,58,255,0), rgba(111,58,255,0.35), rgba(0,198,255,0.35), rgba(0,198,255,0));
+      border: 0;
+      margin: 0;
+    }
+
+    /* ====== HERO ====== */
+    .hero {
+      padding-top: 74px;
+      padding-bottom: 62px;
+      min-height: calc(100vh - 70px);
+      display: grid;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 26px;
+      align-items: center;
+    }
+    @media (max-width: 940px) {
+      .hero { min-height: unset; padding-top: 54px; padding-bottom: 44px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 22px; }
+    }
+
+    .hero-copy {
+      display: grid;
+      gap: 18px;
+      position: relative;
+      z-index: 3;
+    }
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-top: 4px;
+    }
+    .trust-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      color: rgba(255,255,255,0.78);
+      font-size: 13px;
+      margin-top: 10px;
+    }
+    .trust-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .trust-item svg { width: 16px; height: 16px; opacity: .9; }
+
+    .hero-card {
+      position: relative;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
+      border: 1px solid rgba(255,255,255,0.10);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      z-index: 2;
+    }
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      background: radial-gradient(500px 260px at 30% 15%, rgba(111,58,255,0.35), transparent 60%),
+                  radial-gradient(480px 240px at 75% 35%, rgba(0,198,255,0.28), transparent 62%);
+      opacity: 0.9;
+      pointer-events: none;
+      transform: translateZ(0);
+    }
+    .hero-card-inner {
+      position: relative;
+      padding: 18px;
+      display: grid;
+      gap: 12px;
+      z-index: 2;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .mini {
+      border-radius: 18px;
+      background: rgba(20,22,32,0.55);
+      border: 1px solid rgba(255,255,255,0.10);
+      padding: 14px 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.22);
+      transition: transform 300ms var(--ease2), border-color 300ms var(--ease2);
+      will-change: transform;
+    }
+    .mini:hover { transform: translateY(-3px); border-color: rgba(0,198,255,0.22); }
+    .mini h3 {
+      font-size: 14px;
+      letter-spacing: .2px;
+      margin-bottom: 6px;
+      color: rgba(255,255,255,0.92);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .mini p {
+      color: var(--texto-secundario);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .icon svg { width: 16px; height: 16px; }
+
+    /* ====== CARDS / GRIDS ====== */
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    @media (max-width: 920px) { .grid-3 { grid-template-columns: 1fr; } .grid-2 { grid-template-columns: 1fr; } }
+
+    .card {
+      border-radius: var(--radius);
+      background: var(--superficie);
+      border: 1px solid var(--borde);
+      box-shadow: var(--shadow-soft);
+      padding: 18px;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: transform 320ms var(--ease2), border-color 320ms var(--ease2), box-shadow 320ms var(--ease2);
+      will-change: transform;
+    }
+    .card:hover { transform: translateY(-4px); border-color: rgba(143, 99, 255, 0.22); box-shadow: 0 18px 52px rgba(0,0,0,0.42); }
+
+    .card .top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 7px 10px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      color: rgba(255,255,255,0.88);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .25px;
+    }
+    .badge .dot {
+      width: 7px; height: 7px; border-radius: 99px;
+      background: linear-gradient(90deg, var(--violeta), var(--azul));
+      box-shadow: 0 0 0 6px rgba(0,198,255,0.10);
+    }
+    .card h3 {
+      font-size: 1.06rem;
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+      color: rgba(255,255,255,0.94);
+      line-height: 1.2;
+    }
+    .card p {
+      color: var(--texto-secundario);
+      font-size: 0.98rem;
+      line-height: 1.65;
+    }
+    .card ul {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+      color: var(--texto-secundario);
+      font-size: 0.95rem;
+      line-height: 1.55;
+      padding-left: 0;
+    }
+    .card li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .check {
+      width: 20px; height: 20px; flex: 0 0 20px;
+      border-radius: 8px;
+      background: rgba(77,255,184,0.10);
+      border: 1px solid rgba(77,255,184,0.18);
+      display: inline-flex; align-items: center; justify-content: center;
+      margin-top: 1px;
+    }
+    .check svg { width: 14px; height: 14px; color: var(--verde-menta); }
+
+    /* ====== PROCESS ====== */
+    .steps {
+      counter-reset: step;
+      display: grid;
+      gap: 14px;
+    }
+    .step {
+      display: grid;
+      gap: 10px;
+    }
+    .step .label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: .2px;
+    }
+    .step .label::before {
+      counter-increment: step;
+      content: counter(step);
+      width: 28px; height: 28px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      color: rgba(255,255,255,0.92);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+    }
+    .muted { color: var(--texto-secundario); }
+
+    /* ====== CTA / CONTACT ====== */
+    .cta-wrap {
+      border-radius: calc(var(--radius-lg) + 6px);
+      background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+    .cta-wrap::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      background: radial-gradient(700px 320px at 20% 20%, rgba(111,58,255,0.30), transparent 60%),
+                  radial-gradient(680px 300px at 85% 30%, rgba(0,198,255,0.22), transparent 62%),
+                  radial-gradient(600px 280px at 70% 90%, rgba(77,255,184,0.10), transparent 60%);
+      opacity: 0.95;
+      pointer-events: none;
+    }
+    .cta-inner {
+      position: relative;
+      z-index: 2;
+      padding: 26px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 16px;
+      align-items: center;
+    }
+    @media (max-width: 920px) {
+      .cta-inner { grid-template-columns: 1fr; padding: 20px; gap: 14px; }
+    }
+    .cta-title {
+      font-size: clamp(1.55rem, 3vw, 2.05rem);
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+    .cta-copy p { color: rgba(255,255,255,0.82); line-height: 1.6; }
+    .cta-actions {
+      display: grid;
+      gap: 10px;
+      justify-items: stretch;
+    }
+    .btn-wide { width: 100%; padding: 14px 18px; font-size: 15px; }
+    .helper {
+      font-size: 12px;
+      color: rgba(255,255,255,0.70);
+      line-height: 1.5;
+    }
+    .helper strong { color: rgba(255,255,255,0.92); }
+
+    /* ====== FOOTER ====== */
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 22px 0;
+      color: rgba(255,255,255,0.60);
+      font-size: 0.92rem;
+    }
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
       justify-content: space-between;
       align-items: center;
     }
+    .footer-inner a { color: rgba(255,255,255,0.75); text-decoration: none; }
+    .footer-inner a:hover { text-decoration: underline; }
 
-    header strong {
-      font-weight: 700;
-      font-size: 1.3rem;
-      color: var(--texto-principal);
-      letter-spacing: 0.5px;
-    }
-
-    nav a {
-      color: var(--texto-principal);
-      text-decoration: none;
-      margin-left: 2rem;
-      font-weight: 500;
-      transition: opacity 0.3s;
-    }
-
-    nav a:hover { opacity: 0.7; }
-
-    section {
-      padding: 6rem 2rem;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    /* HERO */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      text-align: left;
-      animation: fadeIn 1.5s ease;
-    }
-
-    .hero h1 {
-      font-size: clamp(2.5rem, 6vw, 4rem);
-      line-height: 1.1;
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-      background: linear-gradient(90deg, var(--violeta), var(--azul));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero p {
-      font-size: clamp(1.1rem, 2vw, 1.4rem);
-      color: var(--texto-secundario);
-      margin-bottom: 2.5rem;
-      max-width: 700px;
-    }
-
-    .cta-btn {
-      display: inline-block;
-      background: linear-gradient(90deg, var(--violeta), var(--azul));
-      color: #fff;
-      font-weight: 600;
-      padding: 0.9rem 1.8rem;
-      border-radius: 50px;
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-
-    .cta-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 0 12px rgba(111, 58, 255, 0.5);
-    }
-
-    /* SCROLL EFFECTS */
-    .fade-in {
+    /* ====== REVEAL ANIMATIONS ====== */
+    .reveal {
       opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
+      transform: translateY(18px) scale(0.985);
+      filter: blur(2px);
+      transition: opacity 900ms var(--ease2), transform 900ms var(--ease2), filter 900ms var(--ease2);
+      will-change: transform, opacity;
     }
-
-    .fade-in.visible {
+    .reveal.in {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0) scale(1);
+      filter: blur(0);
     }
 
-    /* SECTION TITLES */
-    h2.section-title {
-      font-size: clamp(2rem, 4vw, 2.4rem);
-      margin-bottom: 2rem;
-      color: var(--violeta);
-      position: relative;
-    }
+    .reveal-left { transform: translateX(-18px) scale(0.99); }
+    .reveal-right { transform: translateX(18px) scale(0.99); }
+    .reveal-zoom { transform: translateY(10px) scale(0.94); }
+    .reveal-tilt { transform: translateY(14px) rotate(0.8deg) scale(0.985); }
 
-    h2.section-title::after {
-      content: "";
-      display: block;
-      width: 60px;
-      height: 3px;
-      background: linear-gradient(90deg, var(--violeta), var(--azul));
-      margin-top: 0.5rem;
-      border-radius: 3px;
+    .stagger > * {
+      opacity: 0;
+      transform: translateY(14px) scale(0.985);
+      filter: blur(2px);
+      transition: opacity 900ms var(--ease2), transform 900ms var(--ease2), filter 900ms var(--ease2);
+      will-change: transform, opacity;
     }
-
-    /* TEXT SECTIONS */
-    .text-block {
-      margin-bottom: 4rem;
-      color: var(--texto-secundario);
-      font-size: 1.1rem;
-      line-height: 1.8;
-      max-width: 800px;
+    .stagger.in > * {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
     }
+    .stagger.in > *:nth-child(1) { transition-delay: 0ms; }
+    .stagger.in > *:nth-child(2) { transition-delay: 80ms; }
+    .stagger.in > *:nth-child(3) { transition-delay: 160ms; }
+    .stagger.in > *:nth-child(4) { transition-delay: 240ms; }
+    .stagger.in > *:nth-child(5) { transition-delay: 320ms; }
+    .stagger.in > *:nth-child(6) { transition-delay: 400ms; }
 
-    /* SERVICES */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      margin-top: 3rem;
+    /* subtle floating */
+    @keyframes floaty {
+      0%, 100% { transform: translate3d(0,0,0); }
+      50% { transform: translate3d(0,-10px,0); }
     }
+    .float { animation: floaty 7s var(--ease2) infinite; }
 
-    .service {
-      background: var(--superficie);
-      border-radius: 12px;
-      padding: 2rem;
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-    }
-
-    .service:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 20px rgba(111, 58, 255, 0.1);
-    }
-
-    .service h3 {
-      font-size: 1.4rem;
-      color: var(--violeta-brillante);
-      margin-bottom: 0.8rem;
-    }
-
-    .service p {
-      color: var(--texto-secundario);
-      font-size: 1rem;
-      line-height: 1.6;
-    }
-
-    /* CTA SECTION */
-    .cta-section {
-      text-align: center;
-      padding: 6rem 2rem;
-    }
-
-    .cta-section h2 {
-      font-size: clamp(2rem, 4vw, 2.4rem);
-      color: var(--texto-principal);
-      margin-bottom: 1rem;
-    }
-
-    .cta-section p {
-      font-size: 1.2rem;
-      color: var(--texto-secundario);
-      margin-bottom: 2rem;
-    }
-
-    footer {
-      text-align: center;
-      padding: 2rem;
-      background: #000;
-      color: var(--texto-secundario);
-      font-size: 0.9rem;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 768px) {
-      header { flex-direction: column; }
-      nav a { margin: 1rem 1rem 0 0; display: inline-block; }
+    /* ====== REDUCED MOTION ====== */
+    @media (prefers-reduced-motion: reduce) {
+      html, body { scroll-behavior: auto; }
+      .reveal, .stagger > * { transition: none !important; transform: none !important; filter: none !important; opacity: 1 !important; }
+      .float { animation: none !important; }
+      .orb { display: none; }
     }
   </style>
 </head>
 
 <body>
+  <div class="grain" aria-hidden="true"></div>
 
   <header>
-    <strong>OMNIA</strong>
-    <nav>
-      <a href="#inicio">Inicio</a>
-      <a href="#nosotros">Nosotros</a>
-      <a href="#servicios">Servicios</a>
-      <a href="#contacto">Contacto</a>
-    </nav>
+    <div class="container">
+      <div class="nav">
+        <a class="brand" href="#inicio" aria-label="OMNIA - Inicio">
+          <span class="logo" aria-hidden="true"></span>
+          <strong>OMNIA</strong>
+          <span class="pill" aria-hidden="true"><span class="dot"></span>Consultoría digital</span>
+        </a>
+
+        <nav aria-label="Navegación principal">
+          <div class="links">
+            <a class="link" href="#servicios">Servicios</a>
+            <a class="link" href="#metodo">Método</a>
+            <a class="link" href="#integraciones">Integraciones</a>
+            <a class="link" href="#contacto">Contacto</a>
+          </div>
+        </nav>
+
+        <div class="nav-cta">
+          <a class="btn btn-ghost" href="#servicios">
+            Ver servicios
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 7h10M7 12h10M7 17h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </a>
+          <a class="btn btn-primary" href="#contacto">
+            Agendá diagnóstico
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h12M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+
+        <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobilePanel">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M5 7h14M5 12h14M5 17h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="mobile-panel" id="mobilePanel">
+        <div class="inner">
+          <a class="link" href="#servicios">Servicios</a>
+          <a class="link" href="#metodo">Método</a>
+          <a class="link" href="#integraciones">Integraciones</a>
+          <a class="link" href="#contacto">Contacto</a>
+          <div class="nav-cta">
+            <a class="btn btn-ghost btn-wide" href="#servicios">Ver servicios</a>
+            <a class="btn btn-primary btn-wide" href="#contacto">Agendá diagnóstico</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </header>
 
   <!-- HERO -->
   <section class="hero" id="inicio">
-    <h1>Consultoría digital especializada en pymes y empresas en crecimiento.</h1>
-    <p>Ordenamos la operación diaria, los procesos y la tecnología para que el crecimiento no se convierta en desorden.</p>
-    <a href="#contacto" class="cta-btn">Hablemos de tu operación actual</a>
-  </section>
+    <div class="bg-orbs" aria-hidden="true">
+      <div class="orb one" data-parallax="0.18"></div>
+      <div class="orb two" data-parallax="0.12"></div>
+      <div class="orb three" data-parallax="0.08"></div>
+    </div>
 
-  <!-- QUIÉNES SOMOS -->
-  <section id="nosotros" class="fade-in">
-    <h2 class="section-title">Quiénes somos</h2>
-    <div class="text-block">
-      <p>OMNIA es una consultora digital que ayuda a empresas a ordenar su operación y sus procesos. Diseñamos soluciones tecnológicas a medida, partiendo siempre del problema — no del producto.</p>
-      <p>Según la situación, la respuesta puede ser un sistema de gestión, una automatización, una app interna o la integración de canales como WhatsApp con Kaption.</p>
-      <p class="highlight">La solución correcta depende del problema.</p>
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-copy reveal reveal-left" data-reveal>
+          <span class="eyebrow">
+            <span class="spark" aria-hidden="true"></span>
+            Para pymes que están creciendo
+          </span>
+
+          <h1>
+            Ordená procesos y tecnología para <span class="gradient-text">escalar sin caos</span>.
+          </h1>
+
+          <p class="lead">
+            Te ayudamos a convertir operación “a mano” en un sistema claro: procesos, automatizaciones e integraciones (ERP, apps internas, WhatsApp/Kaption).
+          </p>
+
+          <div class="hero-ctas">
+            <a class="btn btn-primary" href="#contacto">
+              Diagnóstico de 15 minutos
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h12M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a class="btn btn-ghost" href="#metodo">
+              Cómo trabajamos
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </a>
+          </div>
+
+          <div class="trust-row">
+            <span class="trust-item">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l7 4v6c0 5-3 8-7 8s-7-3-7-8V7l7-4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 12l2 2 4-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Enfoque en impacto (no “herramientas”)
+            </span>
+            <span class="trust-item">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h10M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              Procesos claros + métricas
+            </span>
+            <span class="trust-item">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 7h10v10H7V7Z" stroke="currentColor" stroke-width="2"/><path d="M3 12h4M17 12h4M12 3v4M12 17v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              Integraciones sin fricción
+            </span>
+          </div>
+        </div>
+
+        <aside class="hero-card reveal reveal-right float" data-reveal>
+          <div class="hero-card-inner">
+            <div class="mini-grid">
+              <div class="mini">
+                <h3>
+                  <span class="icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none"><path d="M4 13l4 4L20 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                  Señales de desorden
+                </h3>
+                <p>WhatsApp explotado, planillas sueltas, tareas repetidas, información que “vive” en personas.</p>
+              </div>
+
+              <div class="mini">
+                <h3>
+                  <span class="icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none"><path d="M12 20V10M12 10l-4 4M12 10l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                  Resultado esperado
+                </h3>
+                <p>Un sistema operativo del negocio: procesos definidos, trazabilidad, automatizaciones y datos confiables.</p>
+              </div>
+
+              <div class="mini">
+                <h3>
+                  <span class="icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none"><path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                  Primer paso
+                </h3>
+                <p>Diagnóstico corto: mapeamos operación y detectamos 3 mejoras con impacto inmediato.</p>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
     </div>
   </section>
 
-  <!-- SERVICIOS -->
-  <section id="servicios" class="fade-in">
-    <h2 class="section-title">Cómo lo hacemos</h2>
-    <div class="services-grid">
-      <div class="service">
-        <h3>Consultoría en procesos y operación</h3>
-        <p>Analizamos cómo funciona hoy el negocio y detectamos dónde se genera el desorden.</p>
+  <hr class="divider" />
+
+  <!-- VALUE / PROBLEM -->
+  <section id="valor">
+    <div class="container">
+      <div class="section-head reveal reveal-zoom" data-reveal>
+        <h2 class="section-title">Menos improvisación. Más control.</h2>
+        <p class="section-subtitle">
+          No vendemos “una herramienta”. Diseñamos la solución correcta según tu operación: desde procesos hasta sistemas e integraciones.
+        </p>
       </div>
-      <div class="service">
-        <h3>Diseño de soluciones digitales a medida</h3>
-        <p>Definimos la mejor arquitectura posible según el problema: sistemas, apps, automatizaciones o integraciones.</p>
-      </div>
-      <div class="service">
-        <h3>Implementación de sistemas de gestión</h3>
-        <p>Construimos ERPs simples, claros y adaptados al flujo real de la empresa.</p>
-      </div>
-      <div class="service">
-        <h3>Automatización e integración de herramientas</h3>
-        <p>Conectamos sistemas, eliminamos tareas manuales y ordenamos los flujos de información.</p>
-      </div>
-      <div class="service">
-        <h3>Canales de atención y WhatsApp (Kaption)</h3>
-        <p>Integramos canales de contacto como parte del sistema operativo del negocio.</p>
+
+      <div class="grid-3 stagger" data-stagger>
+        <div class="card">
+          <div class="top">
+            <span class="badge"><span class="dot" aria-hidden="true"></span>Operación</span>
+          </div>
+          <h3>Procesos simples, reales</h3>
+          <p>Definimos cómo se trabaja de verdad (no “en teoría”) para que el equipo ejecute igual, todos los días.</p>
+          <ul>
+            <li><span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Roles, handoffs y responsables</li>
+            <li><span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Rituales y tableros de control</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="top">
+            <span class="badge"><span class="dot" aria-hidden="true"></span>Tecnología</span>
+          </div>
+          <h3>Arquitectura a medida</h3>
+          <p>Elegimos la mejor combinación: ERP, automatizaciones, apps internas e integraciones.</p>
+          <ul>
+            <li><span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Sin lock-in innecesario</li>
+            <li><span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Datos confiables y trazables</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="top">
+            <span class="badge"><span class="dot" aria-hidden="true"></span>Velocidad</span>
+          </div>
+          <h3>Impacto rápido, por etapas</h3>
+          <p>Priorizamos quick wins sin romper la operación. Implementación por sprints, con métricas.</p>
+          <ul>
+            <li><span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Plan 30/60/90 días</li>
+            <li><span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Adopción del equipo</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA FINAL -->
-  <section class="cta-section fade-in" id="contacto">
-    <h2>Veamos juntos dónde se está generando el desorden</h2>
-    <p>Una conversación breve alcanza para entender cómo funciona hoy tu operación y qué se puede ordenar.</p>
-    <a href="mailto:info@omnia.com" class="cta-btn">Hablemos de cómo está funcionando hoy tu operación</a>
+  <hr class="divider" />
+
+  <!-- SERVICES -->
+  <section id="servicios">
+    <div class="container">
+      <div class="section-head reveal reveal-tilt" data-reveal>
+        <h2 class="section-title">Servicios</h2>
+        <p class="section-subtitle">
+          Unimos consultoría + ejecución. Menos PowerPoint, más implementación.
+        </p>
+      </div>
+
+      <div class="grid-3 stagger" data-stagger>
+        <div class="card">
+          <div class="top">
+            <span class="badge"><span class="dot" aria-hidden="true"></span>Diagnóstico</span>
+          </div>
+          <h3>Mapeo de operación</h3>
+          <p>Detectamos cuellos de botella, duplicación de tareas y puntos donde se “pierde” información.</p>
+        </div>
+
+        <div class="card">
+          <div class="top">
+            <span class="badge"><span class="dot" aria-hidden="true"></span>Procesos</span>
+          </div>
+          <h3>Diseño de procesos</h3>
+          <p>Procesos claros, responsables definidos y reglas simples para escalar sin fricción.</p>
+        </div>
+
+        <div class="card">
+          <div class="top">
+            <span class="badge"><span class="dot" aria-hidden="true"></span>Sistemas</span>
+          </div>
+          <h3>ERP y apps internas</h3>
+          <p>Implementamos sistemas de gestión simples y adaptados al flujo real del negocio.</p>
+        </div>
+
+        <div class="card">
+          <div class="top">
+            <span class="badge"><span class="dot" aria-hidden="true"></span>Automatización</span>
+          </div>
+          <h3>Automatizaciones e integraciones</h3>
+          <p>Conectamos herramientas, eliminamos tareas manuales y mejoramos el flujo de datos.</p>
+        </div>
+
+        <div class="card">
+          <div class="top">
+            <span class="badge"><span class="dot" aria-hidden="true"></span>Atención</span>
+          </div>
+          <h3>WhatsApp & canales (Kaption)</h3>
+          <p>Centralizamos chats y automatizamos respuestas para que el equipo atienda mejor, con menos carga.</p>
+        </div>
+
+        <div class="card">
+          <div class="top">
+            <span class="badge"><span class="dot" aria-hidden="true"></span>Gestión</span>
+          </div>
+          <h3>Implementación por sprints</h3>
+          <p>Plan, backlog y entregas iterativas. Medimos impacto y aseguramos adopción.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- METHOD -->
+  <section id="metodo">
+    <div class="container">
+      <div class="section-head reveal" data-reveal>
+        <h2 class="section-title">Método OMNIA</h2>
+        <p class="section-subtitle">
+          En 3 pasos: claridad, diseño y ejecución. Sin humo.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card reveal reveal-left" data-reveal>
+          <div class="top">
+            <span class="badge"><span class="dot" aria-hidden="true"></span>Enfoque</span>
+          </div>
+          <h3>La solución correcta depende del problema</h3>
+          <p>Arrancamos por operación: qué pasa, quién lo hace, dónde se corta el flujo y qué datos faltan.</p>
+          <ul>
+            <li><span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Diagnóstico + prioridades</li>
+            <li><span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Plan por etapas (quick wins + base sólida)</li>
+            <li><span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Implementación y adopción</li>
+          </ul>
+        </div>
+
+        <div class="card reveal reveal-right" data-reveal>
+          <div class="top">
+            <span class="badge"><span class="dot" aria-hidden="true"></span>Pasos</span>
+          </div>
+          <div class="steps">
+            <div class="step">
+              <div class="label">Diagnóstico</div>
+              <div class="muted">Entendemos la operación y definimos dónde se pierde tiempo/datos.</div>
+            </div>
+            <div class="step">
+              <div class="label">Diseño</div>
+              <div class="muted">Definimos procesos + arquitectura: sistema, automatización o integración.</div>
+            </div>
+            <div class="step">
+              <div class="label">Ejecución</div>
+              <div class="muted">Implementamos por sprints y medimos impacto (tiempo, errores, visibilidad).</div>
+            </div>
+          </div>
+
+          <div style="height: 12px"></div>
+
+          <a class="btn btn-primary btn-wide" href="#contacto">
+            Agendá el diagnóstico
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h12M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <div class="helper">Sin compromiso. Te llevás un plan inicial con <strong>3 mejoras prioritarias</strong>.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- INTEGRATIONS -->
+  <section id="integraciones">
+    <div class="container">
+      <div class="section-head reveal reveal-zoom" data-reveal>
+        <h2 class="section-title">Integraciones que destraban operación</h2>
+        <p class="section-subtitle">
+          Conectamos canales, sistemas y datos para que todo fluya. Si necesitás WhatsApp/Kaption, lo diseñamos como parte del “sistema operativo” del negocio.
+        </p>
+      </div>
+
+      <div class="grid-3 stagger" data-stagger>
+        <div class="card">
+          <div class="top">
+            <span class="badge"><span class="dot" aria-hidden="true"></span>WhatsApp</span>
+          </div>
+          <h3>Atención centralizada</h3>
+          <p>Chats ordenados por equipos, tags, SLA y handoffs claros.</p>
+        </div>
+
+        <div class="card">
+          <div class="top">
+            <span class="badge"><span class="dot" aria-hidden="true"></span>Automatización</span>
+          </div>
+          <h3>Respuestas y flujos</h3>
+          <p>Mensajes automáticos con contexto (KBs, reglas y derivación a humanos cuando hace falta).</p>
+        </div>
+
+        <div class="card">
+          <div class="top">
+            <span class="badge"><span class="dot" aria-hidden="true"></span>Datos</span>
+          </div>
+          <h3>CRM / ERP / tableros</h3>
+          <p>Que lo que pasa en los chats termine en el sistema: clientes, estados, pedidos, turnos, cobros.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="contacto">
+    <div class="container">
+      <div class="cta-wrap reveal" data-reveal>
+        <div class="cta-inner">
+          <div class="cta-copy">
+            <div class="section-head" style="margin-bottom: 0;">
+              <h2 class="cta-title">En 15 minutos te decimos por dónde empezar</h2>
+              <p>Contanos cómo funciona hoy tu operación. Te devolvemos un plan corto con prioridades y próximos pasos.</p>
+            </div>
+          </div>
+
+          <div class="cta-actions">
+            <a class="btn btn-primary btn-wide" href="mailto:info@omnia.com?subject=Diagn%C3%B3stico%20OMNIA%20(15%20min)&body=Hola%2C%20quiero%20coordinar%20un%20diagn%C3%B3stico%20de%2015%20min.%0A%0AEmpresa%3A%0ARubro%3A%0AEquipo%3A%0AProblema%20principal%3A%0A%0AGracias.">
+              Escribinos por email
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16v12H4V6Z" stroke="currentColor" stroke-width="2"/><path d="m4 8 8 6 8-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+
+            <!-- Reemplazá el número por el real: https://wa.me/549XXXXXXXXXX -->
+            <a class="btn btn-ghost btn-wide" href="https://wa.me/549XXXXXXXXXX" target="_blank" rel="noopener">
+              Escribinos por WhatsApp
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 11.5a7.5 7.5 0 0 1-11.5 6.5L4 20l2-4.5A7.5 7.5 0 1 1 20 11.5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+            </a>
+
+            <div class="helper">
+              Respuesta en <strong>24h hábiles</strong>. Si ya tenés Kaption/WhatsApp, lo integramos al plan.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <footer>
-    © 2025 OMNIA — Procesos claros, equipo más libre.
+    <div class="container">
+      <div class="footer-inner">
+        <div>© 2025 OMNIA — Procesos claros, equipo más libre.</div>
+        <div style="display:flex; gap:14px; flex-wrap:wrap;">
+          <a href="#inicio">Inicio</a>
+          <a href="#servicios">Servicios</a>
+          <a href="#contacto">Contacto</a>
+        </div>
+      </div>
+    </div>
   </footer>
 
   <script>
-    // IntersectionObserver para animaciones de scroll
-    const fadeElements = document.querySelectorAll('.fade-in');
+    (function () {
+      const $ = (s, root = document) => root.querySelector(s);
+      const $$ = (s, root = document) => Array.from(root.querySelectorAll(s));
 
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
+      // Mobile menu
+      const menuBtn = $('#menuBtn');
+      const panel = $('#mobilePanel');
+
+      function closeMenu() {
+        if (!panel) return;
+        panel.classList.remove('open');
+        menuBtn?.setAttribute('aria-expanded', 'false');
+      }
+
+      menuBtn?.addEventListener('click', () => {
+        const isOpen = panel.classList.toggle('open');
+        menuBtn.setAttribute('aria-expanded', String(isOpen));
       });
-    }, { threshold: 0.2 });
 
-    fadeElements.forEach(el => observer.observe(el));
+      $$('#mobilePanel a').forEach(a => a.addEventListener('click', closeMenu));
+      window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
 
-    // Zoom-out hero al hacer scroll
-    const hero = document.querySelector('.hero');
-    window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-      hero.style.transform = `scale(${1 - scrollY / 5000})`;
-      hero.style.opacity = `${1 - scrollY / 1200}`;
-    });
+      // Reveal animations
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (!prefersReduced) {
+        const revealEls = $$('[data-reveal]');
+        const staggerEls = $$('[data-stagger]');
+
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('in');
+            io.unobserve(entry.target);
+          });
+        }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+
+        revealEls.forEach(el => io.observe(el));
+        staggerEls.forEach(el => io.observe(el));
+      } else {
+        $$('[data-reveal], [data-stagger]').forEach(el => el.classList.add('in'));
+      }
+
+      // Smooth, subtle hero scroll transform (zoom-out + lift)
+      const hero = $('.hero');
+      const heroCopy = $('.hero-copy');
+      const heroCard = $('.hero-card');
+
+      function clamp(n, a, b) { return Math.max(a, Math.min(b, n)); }
+
+      function onScroll() {
+        const y = window.scrollY || 0;
+        const t = clamp(y / 900, 0, 1);
+
+        if (hero) {
+          hero.style.transform = `translateY(${t * -10}px)`;
+          hero.style.opacity = `${1 - t * 0.25}`;
+        }
+        if (heroCopy) {
+          heroCopy.style.transform = `translateY(${t * -12}px)`;
+        }
+        if (heroCard) {
+          const scale = 1 - t * 0.045;
+          heroCard.style.transform = `translateY(${t * 10}px) scale(${scale})`;
+        }
+
+        // Parallax orbs
+        $$('.orb').forEach((orb) => {
+          const factor = parseFloat(orb.getAttribute('data-parallax') || '0.1');
+          const px = y * factor;
+          orb.style.transform = `translate3d(0, ${px}px, 0)`;
+        });
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
   </script>
 </body>
 </html>
