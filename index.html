@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>OMNIA — Soluciones y Automatizaciones con IA</title>
-  <meta name="description" content="Soluciones Digitales y Automatizaciones con IA para PyMEs que quieren ordenar su operación y escalar sin caos." />
+  <meta name="description" content="Soluciones y automatizaciones con IA para PyMEs que quieren ordenar su operación y escalar sin caos." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,6 +24,7 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
       font-family: 'Inter', sans-serif;
       color: var(--text);
@@ -43,6 +44,7 @@
       padding: 0 20px;
     }
 
+    /* ===== HEADER ===== */
     header {
       position: sticky;
       top: 0;
@@ -56,7 +58,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 16px 0;
+      padding: 14px 0;
     }
 
     .logo {
@@ -64,6 +66,7 @@
       letter-spacing: .6px;
     }
 
+    /* ===== BUTTONS ===== */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -97,17 +100,25 @@
       color: var(--text);
     }
 
+    /* ===== HERO ===== */
     .hero {
-      min-height: calc(100vh - 72px);
       display: flex;
       align-items: center;
       text-align: center;
+      padding: 32px 0;
+      min-height: calc(100svh - 64px);
+    }
+
+    @supports not (height: 100svh) {
+      .hero {
+        min-height: calc(100vh - 64px);
+      }
     }
 
     .hero-inner {
       width: 100%;
       display: grid;
-      gap: 22px;
+      gap: 20px;
       justify-items: center;
     }
 
@@ -118,13 +129,13 @@
     }
 
     h1 {
-      font-size: clamp(2.4rem, 6vw, 3.8rem);
+      font-size: clamp(2.3rem, 6vw, 3.8rem);
       line-height: 1.05;
       letter-spacing: -0.02em;
     }
 
     .subtitle {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       color: var(--muted);
       max-width: 640px;
     }
@@ -139,13 +150,16 @@
       gap: 14px;
       flex-wrap: wrap;
       justify-content: center;
-      margin-top: 8px;
+      margin-top: 6px;
+      width: 100%;
     }
 
+    /* ===== SECTIONS ===== */
     section {
       padding: 72px 0;
     }
 
+    /* ===== CARDS ===== */
     .cards {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -179,6 +193,7 @@
       font-size: .95rem;
     }
 
+    /* ===== FINAL CTA ===== */
     .final-cta {
       text-align: center;
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
@@ -197,6 +212,7 @@
       margin-bottom: 22px;
     }
 
+    /* ===== ANIMATIONS ===== */
     .fade-up {
       opacity: 0;
       transform: translateY(16px);
@@ -207,6 +223,26 @@
       opacity: 1;
       transform: translateY(0);
     }
+
+    /* ===== MOBILE TWEAKS ===== */
+    @media (max-width: 768px) {
+      h1 { font-size: 2.2rem; }
+      .subtitle { font-size: 1.05rem; }
+      .impact { font-size: 0.95rem; }
+      section { padding: 56px 0; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-ctas {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .hero-ctas .btn {
+        width: 100%;
+        max-width: 320px;
+      }
+    }
   </style>
 </head>
 
@@ -215,15 +251,18 @@
 <header>
   <div class="container header-inner">
     <div class="logo">OMNIA</div>
-    <a href="https://wa.me/5491134292999" target="_blank" class="btn btn-primary">Agendar Demo</a>
+    <a href="https://wa.me/5491134292999" target="_blank" class="btn btn-primary">
+      Agendá diagnóstico
+    </a>
   </div>
 </header>
 
 <main>
 
+  <!-- HERO -->
   <section class="hero">
     <div class="container hero-inner fade-up">
-      <div class="eyebrow"></div>
+      <div class="eyebrow">Para PyMEs en crecimiento</div>
 
       <h1>SOLUCIONES Y AUTOMATIZACIONES CON IA</h1>
 
@@ -236,12 +275,17 @@
       </div>
 
       <div class="hero-ctas">
-        <a href="https://wa.me/5491134292999" target="_blank" class="btn btn-primary">Agendar Demo</a>
-        <a href="#soluciones" class="btn btn-ghost">Ver soluciones</a>
+        <a href="https://wa.me/5491134292999" target="_blank" class="btn btn-primary">
+          Agendá diagnóstico
+        </a>
+        <a href="#soluciones" class="btn btn-ghost">
+          Ver soluciones
+        </a>
       </div>
     </div>
   </section>
 
+  <!-- SOLUCIONES -->
   <section id="soluciones">
     <div class="container">
       <div class="cards fade-up">
@@ -263,12 +307,15 @@
     </div>
   </section>
 
+  <!-- CTA FINAL -->
   <section id="cta">
     <div class="container">
       <div class="final-cta fade-up">
         <h2>Te mostramos por dónde empezar</h2>
         <p>Diagnóstico de 15 minutos + plan de próximos pasos.</p>
-        <a href="https://wa.me/5491134292999" target="_blank" class="btn btn-primary">Agendar Demo</a>
+        <a href="https://wa.me/5491134292999" target="_blank" class="btn btn-primary">
+          Agendá diagnóstico
+        </a>
       </div>
     </div>
   </section>
