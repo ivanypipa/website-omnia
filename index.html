@@ -44,13 +44,13 @@
       padding: 0 20px;
     }
 
-    /* ================= HEADER ================= */
+    /* ===== HEADER ===== */
     header {
       position: sticky;
       top: 0;
       z-index: 10;
-      backdrop-filter: blur(10px);
-      background: rgba(11,12,16,.65);
+      backdrop-filter: blur(12px);
+      background: rgba(11,12,16,.6);
       border-bottom: 1px solid rgba(255,255,255,.06);
     }
 
@@ -58,7 +58,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 12px 0;
+      padding: 14px 0;
     }
 
     .logo {
@@ -66,7 +66,7 @@
       letter-spacing: .6px;
     }
 
-    /* ================= BUTTONS ================= */
+    /* ===== BUTTONS ===== */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -75,7 +75,7 @@
       padding: 14px 22px;
       font-weight: 700;
       font-size: 15px;
-      transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+      transition: transform .25s var(--ease), box-shadow .25s var(--ease), background .25s var(--ease);
       white-space: nowrap;
     }
 
@@ -100,19 +100,25 @@
       color: var(--text);
     }
 
-    /* ================= HERO ================= */
+    /* ===== HERO ===== */
     .hero {
       display: flex;
       align-items: center;
       text-align: center;
-      min-height: calc(100svh - 56px);
       padding: 32px 0;
+      min-height: calc(100svh - 64px);
+    }
+
+    @supports not (height: 100svh) {
+      .hero {
+        min-height: calc(100vh - 64px);
+      }
     }
 
     .hero-inner {
       width: 100%;
       display: grid;
-      gap: 18px;
+      gap: 20px;
       justify-items: center;
     }
 
@@ -123,7 +129,7 @@
     }
 
     h1 {
-      font-size: clamp(2.6rem, 6vw, 3.8rem);
+      font-size: clamp(2.3rem, 6vw, 3.8rem);
       line-height: 1.05;
       letter-spacing: -0.02em;
     }
@@ -131,7 +137,7 @@
     .subtitle {
       font-size: 1.15rem;
       color: var(--muted);
-      max-width: 620px;
+      max-width: 640px;
     }
 
     .impact {
@@ -142,21 +148,26 @@
     .hero-ctas {
       display: flex;
       gap: 14px;
+      flex-wrap: wrap;
       justify-content: center;
-      margin-top: 8px;
+      margin-top: 6px;
       width: 100%;
     }
 
-    /* ================= SECTIONS ================= */
+    /* ===== SECTIONS ===== */
     section {
       padding: 72px 0;
     }
 
-    /* ================= CARDS ================= */
+    /* ===== CARDS ===== */
     .cards {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 18px;
+    }
+
+    @media (max-width: 900px) {
+      .cards { grid-template-columns: 1fr; }
     }
 
     .card {
@@ -182,7 +193,7 @@
       font-size: .95rem;
     }
 
-    /* ================= FINAL CTA ================= */
+    /* ===== FINAL CTA ===== */
     .final-cta {
       text-align: center;
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
@@ -201,7 +212,7 @@
       margin-bottom: 22px;
     }
 
-    /* ================= ANIMATIONS ================= */
+    /* ===== ANIMATIONS ===== */
     .fade-up {
       opacity: 0;
       transform: translateY(16px);
@@ -213,52 +224,23 @@
       transform: translateY(0);
     }
 
-    /* ================= MOBILE (ESTILO STUDIOCHAT) ================= */
+    /* ===== MOBILE TWEAKS ===== */
     @media (max-width: 768px) {
-      .hero {
-        align-items: flex-start;
-        min-height: auto;
-        padding-top: 56px;
-        padding-bottom: 48px;
-      }
-
-      .hero-inner {
-        gap: 14px;
-      }
-
-      h1 {
-        font-size: 2.1rem;
-        line-height: 1.1;
-      }
-
-      .subtitle {
-        font-size: 1rem;
-      }
-
-      .impact {
-        font-size: 0.95rem;
-      }
-
-      section {
-        padding: 56px 0;
-      }
-
-      .cards {
-        grid-template-columns: 1fr;
-      }
+      h1 { font-size: 2.2rem; }
+      .subtitle { font-size: 1.05rem; }
+      .impact { font-size: 0.95rem; }
+      section { padding: 56px 0; }
     }
 
     @media (max-width: 480px) {
       .hero-ctas {
         flex-direction: column;
-        margin-top: 12px;
+        align-items: center;
       }
 
       .hero-ctas .btn {
         width: 100%;
-        max-width: 340px;
-        padding: 16px 22px;
-        font-size: 16px;
+        max-width: 320px;
       }
     }
   </style>
@@ -311,10 +293,12 @@
           <h3>Automatizaciones</h3>
           <p>Tareas repetidas → automáticas.</p>
         </div>
+
         <div class="card">
           <h3>Integraciones</h3>
           <p>WhatsApp, CRM y ERP conectados.</p>
         </div>
+
         <div class="card">
           <h3>Sistemas internos</h3>
           <p>Apps y ERP simples a medida.</p>
