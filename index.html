@@ -3,67 +3,83 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>OMNIA — Soluciones y Automatizaciones con IA</title>
+  <title>OMNIA — Automatización Inteligente</title>
   <meta name="description" content="Soluciones y automatizaciones con IA para PyMEs que quieren ordenar su operación y escalar sin caos." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #0b0c10;
-      --surface: rgba(255,255,255,0.06);
-      --border: rgba(255,255,255,0.12);
+      /* Palette StudioChat Style */
+      --bg: #050505;
+      --surface: #0f0f0f;
+      --border: rgba(255, 255, 255, 0.08);
       --text: #ffffff;
-      --muted: #b8b8cc;
-      --violet: #6f3aff;
-      --blue: #00c6ff;
-      --radius: 18px;
-      --ease: cubic-bezier(.2,.8,.2,1);
+      --muted: #a1a1aa;
+      --primary: #00f08a; /* Verde StudioChat */
+      --primary-glow: rgba(0, 240, 138, 0.2);
+      --radius-lg: 20px;
+      --radius-sm: 12px;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+      -webkit-font-smoothing: antialiased;
+    }
+
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Inter', sans-serif;
       color: var(--text);
-      background:
-        radial-gradient(600px 400px at 20% 20%, rgba(111,58,255,.25), transparent 60%),
-        radial-gradient(600px 400px at 80% 10%, rgba(0,198,255,.2), transparent 60%),
-        var(--bg);
-      min-height: 100vh;
+      background-color: var(--bg);
+      /* Gradientes más sutiles y limpios */
+      background-image: 
+        radial-gradient(circle at 50% -20%, var(--primary-glow), transparent 70%),
+        radial-gradient(circle at 0% 100%, rgba(0, 240, 138, 0.05), transparent 40%);
+      line-height: 1.5;
       overflow-x: hidden;
     }
 
-    a { color: inherit; text-decoration: none; }
-
     .container {
-      max-width: 1080px;
+      width: 100%;
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 0 20px;
+      padding: 0 24px; /* Aumentado para mejor respiración en mobile */
     }
 
     /* ===== HEADER ===== */
     header {
-      position: sticky;
+      position: fixed;
       top: 0;
-      z-index: 10;
-      backdrop-filter: blur(12px);
-      background: rgba(11,12,16,.6);
-      border-bottom: 1px solid rgba(255,255,255,.06);
+      left: 0;
+      right: 0;
+      z-index: 100;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(5, 5, 5, 0.7);
+      border-bottom: 1px solid var(--border);
     }
 
     .header-inner {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 14px 0;
+      height: 72px;
     }
 
     .logo {
       font-weight: 800;
-      letter-spacing: .6px;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+      background: linear-gradient(to right, #fff, var(--muted));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     /* ===== BUTTONS ===== */
@@ -71,152 +87,154 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      border-radius: 999px;
-      padding: 14px 22px;
-      font-weight: 700;
+      border-radius: var(--radius-sm);
+      padding: 12px 24px;
+      font-weight: 600;
       font-size: 15px;
-      transition: transform .25s var(--ease), box-shadow .25s var(--ease), background .25s var(--ease);
-      white-space: nowrap;
+      transition: all 0.3s var(--ease);
+      cursor: pointer;
+      border: none;
     }
 
     .btn-primary {
-      background: linear-gradient(90deg, var(--violet), var(--blue));
-      box-shadow: 0 10px 30px rgba(111,58,255,.3);
+      background: var(--primary);
+      color: #000;
+      box-shadow: 0 4px 20px var(--primary-glow);
     }
 
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 16px 44px rgba(111,58,255,.4);
+      filter: brightness(1.1);
+      box-shadow: 0 8px 30px var(--primary-glow);
     }
 
     .btn-ghost {
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text);
       border: 1px solid var(--border);
-      background: transparent;
-      color: var(--muted);
     }
 
     .btn-ghost:hover {
-      background: rgba(255,255,255,.06);
-      color: var(--text);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
     }
 
     /* ===== HERO ===== */
     .hero {
+      padding-top: 140px;
+      padding-bottom: 60px;
+      min-height: 90vh;
       display: flex;
       align-items: center;
       text-align: center;
-      padding: 32px 0;
-      min-height: calc(100svh - 64px);
-    }
-
-    @supports not (height: 100svh) {
-      .hero {
-        min-height: calc(100vh - 64px);
-      }
     }
 
     .hero-inner {
-      width: 100%;
-      display: grid;
-      gap: 20px;
-      justify-items: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
     }
 
     .eyebrow {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      background: rgba(0, 240, 138, 0.1);
+      padding: 6px 16px;
+      border-radius: 100px;
     }
 
     h1 {
-      font-size: clamp(2.3rem, 6vw, 3.8rem);
-      line-height: 1.05;
-      letter-spacing: -0.02em;
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      line-height: 1.1;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      max-width: 900px;
     }
 
     .subtitle {
-      font-size: 1.15rem;
+      font-size: clamp(1.1rem, 2vw, 1.25rem);
       color: var(--muted);
-      max-width: 640px;
-    }
-
-    .impact {
-      font-size: 1rem;
-      color: rgba(255,255,255,.9);
+      max-width: 600px;
+      line-height: 1.6;
     }
 
     .hero-ctas {
       display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 6px;
+      flex-direction: column; /* Mobile first */
+      gap: 12px;
       width: 100%;
+      margin-top: 12px;
     }
 
-    /* ===== SECTIONS ===== */
+    /* ===== SOLUTIONS SECTION ===== */
     section {
-      padding: 72px 0;
+      padding: 80px 0;
     }
 
-    /* ===== CARDS ===== */
     .cards {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    @media (max-width: 900px) {
-      .cards { grid-template-columns: 1fr; }
+      grid-template-columns: 1fr; /* Mobile first */
+      gap: 16px;
     }
 
     .card {
-      padding: 22px;
-      border-radius: var(--radius);
+      padding: 32px;
+      border-radius: var(--radius-lg);
       background: var(--surface);
       border: 1px solid var(--border);
-      backdrop-filter: blur(10px);
-      transition: transform .3s var(--ease);
+      text-align: left;
+      transition: all 0.4s var(--ease);
     }
 
     .card:hover {
-      transform: translateY(-4px);
+      border-color: rgba(0, 240, 138, 0.3);
+      background: rgba(255, 255, 255, 0.02);
     }
 
     .card h3 {
-      font-size: 1.1rem;
-      margin-bottom: 6px;
+      font-size: 1.25rem;
+      margin-bottom: 12px;
+      color: var(--text);
     }
 
     .card p {
       color: var(--muted);
-      font-size: .95rem;
+      font-size: 1rem;
+      line-height: 1.5;
     }
 
     /* ===== FINAL CTA ===== */
     .final-cta {
       text-align: center;
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      background: linear-gradient(135deg, #0f0f0f 0%, #050505 100%);
       border: 1px solid var(--border);
-      border-radius: calc(var(--radius) + 6px);
-      padding: 48px 24px;
+      border-radius: 32px;
+      padding: 60px 24px;
+      position: relative;
+      overflow: hidden;
     }
 
     .final-cta h2 {
-      font-size: 2rem;
-      margin-bottom: 10px;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
     }
 
     .final-cta p {
       color: var(--muted);
-      margin-bottom: 22px;
+      margin-bottom: 32px;
+      font-size: 1.1rem;
     }
 
     /* ===== ANIMATIONS ===== */
     .fade-up {
       opacity: 0;
-      transform: translateY(16px);
-      transition: opacity .8s var(--ease), transform .8s var(--ease);
+      transform: translateY(20px);
+      transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
     }
 
     .fade-up.in {
@@ -224,23 +242,38 @@
       transform: translateY(0);
     }
 
-    /* ===== MOBILE TWEAKS ===== */
-    @media (max-width: 768px) {
-      h1 { font-size: 2.2rem; }
-      .subtitle { font-size: 1.05rem; }
-      .impact { font-size: 0.95rem; }
-      section { padding: 56px 0; }
-    }
-
-    @media (max-width: 480px) {
+    /* ===== RESPONSIVE BREAKPOINTS ===== */
+    
+    /* Tablets and Desktop */
+    @media (min-width: 768px) {
       .hero-ctas {
-        flex-direction: column;
-        align-items: center;
+        flex-direction: row;
+        justify-content: center;
+        width: auto;
       }
 
-      .hero-ctas .btn {
+      .btn {
+        width: auto;
+        min-width: 180px;
+      }
+
+      .cards {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      section {
+        padding: 120px 0;
+      }
+    }
+
+    /* Específico para Mobile para asegurar centrado perfecto */
+    @media (max-width: 767px) {
+      .hero-inner {
         width: 100%;
-        max-width: 320px;
+      }
+      
+      .btn {
+        width: 100%; /* Botones de ancho completo en móvil para mejor UX */
       }
     }
   </style>
@@ -251,7 +284,7 @@
 <header>
   <div class="container header-inner">
     <div class="logo">OMNIA</div>
-    <a href="https://wa.me/5491134292999" target="_blank" class="btn btn-primary">
+    <a href="https://wa.me/5491134292999" target="_blank" class="btn btn-primary" style="padding: 8px 16px; font-size: 14px; min-width: auto;">
       Agendar Demo
     </a>
   </div>
@@ -259,20 +292,15 @@
 
 <main>
 
-  <!-- HERO -->
   <section class="hero">
     <div class="container hero-inner fade-up">
       <div class="eyebrow">Para PyMEs en crecimiento</div>
 
-      <h1>SOLUCIONES Y AUTOMATIZACIONES CON IA</h1>
+      <h1>SOLUCIONES Y AUTOMATIZACIONES CON <span style="color: var(--primary)">IA</span></h1>
 
-      <div class="subtitle">
-        Para PyMEs que quieren ordenar su operación y escalar sin caos.
-      </div>
-
-      <div class="impact">
-        Menos tareas manuales. Más control y trazabilidad.
-      </div>
+      <p class="subtitle">
+        Ordenamos tu operación para que puedas escalar sin caos. Menos tareas manuales, más control y trazabilidad.
+      </p>
 
       <div class="hero-ctas">
         <a href="https://wa.me/5491134292999" target="_blank" class="btn btn-primary">
@@ -285,36 +313,43 @@
     </div>
   </section>
 
-  <!-- SOLUCIONES -->
   <section id="soluciones">
     <div class="container">
       <div class="cards fade-up">
         <div class="card">
+          <div style="color: var(--primary); margin-bottom: 16px;">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
           <h3>Automatizaciones</h3>
-          <p>Tareas repetidas → automáticas.</p>
+          <p>Convierte tareas repetitivas en procesos automáticos que corren 24/7 sin errores.</p>
         </div>
 
         <div class="card">
+          <div style="color: var(--primary); margin-bottom: 16px;">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4-4m-4 4l4 4"/></svg>
+          </div>
           <h3>Integraciones</h3>
-          <p>WhatsApp, CRM y ERP conectados.</p>
+          <p>Conectamos tu WhatsApp, CRM y ERP para que la información fluya sin interrupciones.</p>
         </div>
 
         <div class="card">
-          <h3>Sistemas internos</h3>
-          <p>Apps y ERP simples a medida.</p>
+          <div style="color: var(--primary); margin-bottom: 16px;">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+          </div>
+          <h3>Sistemas Internos</h3>
+          <p>Desarrollamos aplicaciones y paneles a medida, simples de usar y enfocados en resultados.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA FINAL -->
   <section id="cta">
     <div class="container">
       <div class="final-cta fade-up">
         <h2>Te mostramos por dónde empezar</h2>
-        <p>Diagnóstico de 15 minutos + plan de próximos pasos.</p>
+        <p>Recibe un diagnóstico de 15 minutos y un plan de acción personalizado.</p>
         <a href="https://wa.me/5491134292999" target="_blank" class="btn btn-primary">
-          Agendar Demo
+          Agendar Demo Ahora
         </a>
       </div>
     </div>
@@ -325,9 +360,11 @@
 <script>
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('in');
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+      }
     });
-  }, { threshold: 0.15 });
+  }, { threshold: 0.1 });
 
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 </script>
